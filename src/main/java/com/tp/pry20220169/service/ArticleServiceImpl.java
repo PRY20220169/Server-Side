@@ -21,6 +21,12 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public Article getArticleById(Long articleId) {
+        return articleRepository.findById(articleId)
+                .orElseThrow(() -> new ResourceNotFoundException("Article", "Id", articleId));
+    }
+
+    @Override
     public Article createArticle(Article article) {
         return articleRepository.save(article);
     }
