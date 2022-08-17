@@ -1,4 +1,4 @@
-package com.tp.pry20220169.model;
+package com.tp.pry20220169.domain.model;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.tp.pry20220169.model;
+package com.tp.pry20220169.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedDate;

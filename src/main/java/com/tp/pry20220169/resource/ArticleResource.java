@@ -1,6 +1,6 @@
 package com.tp.pry20220169.resource;
 
-import com.tp.pry20220169.model.AuditModel;
+import com.tp.pry20220169.domain.model.AuditModel;
 import lombok.Data;
 
 import java.util.Date;
