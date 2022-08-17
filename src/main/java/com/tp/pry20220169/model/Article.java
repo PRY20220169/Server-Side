@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "articles")
 @Data
-public class Article {
+public class Article extends AuditModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
