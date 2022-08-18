@@ -12,6 +12,10 @@ public class SaveMetricResource {
 
     @NotNull
     @NotBlank
+    private String bibliometric;
+
+    @NotNull
+    @NotBlank
     @Size(max = 5)
     private String score;
 
