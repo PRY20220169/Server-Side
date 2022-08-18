@@ -9,7 +9,7 @@ public interface ArticleService {
     Page<Article> getAllArticles(Pageable pageable);
     Article getArticleById(Long articleId);
     Article createArticle(Article article);
-    Article updateArticle(Long articleId, Article article);
+    Article updateArticle(Long articleId, Article articleDetails);
     ResponseEntity<?> deleteArticle(Long articleId);
 
     // TODO: Implement more methods
