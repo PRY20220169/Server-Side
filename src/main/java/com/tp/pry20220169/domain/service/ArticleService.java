@@ -9,8 +9,8 @@ public interface ArticleService {
     Page<Article> getAllArticles(Pageable pageable);
     Article getArticleById(Long articleId);
     Article createArticle(Article article);
-    Article updateArticle(Long id, Article article);
-    ResponseEntity<?> deleteArticle(Long id);
+    Article updateArticle(Long articleId, Article article);
+    ResponseEntity<?> deleteArticle(Long articleId);
 
     // TODO: Implement more methods
 
