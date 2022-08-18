@@ -389,15 +389,15 @@
 			]
 		},
 		{
-			"name": "Bibliometrics",
+			"name": "Metrics",
 			"item": [
 				{
-					"name": "GetAllBibliometrics",
+					"name": "GetAllMetrics",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/bibliometrics",
+							"raw": "http://localhost:8080/api/metrics",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -405,18 +405,18 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"bibliometrics"
+								"metrics"
 							]
 						}
 					},
 					"response": [
 						{
-							"name": "GetAllBibliometrics",
+							"name": "GetAllMetrics",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/api/bibliometrics",
+									"raw": "http://localhost:8080/api/metrics",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -424,7 +424,7 @@
 									"port": "8080",
 									"path": [
 										"api",
-										"bibliometrics"
+										"metrics"
 									]
 								}
 							},
@@ -454,7 +454,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Thu, 18 Aug 2022 00:19:16 GMT"
+									"value": "Thu, 18 Aug 2022 23:08:28 GMT"
 								},
 								{
 									"key": "Keep-Alive",
@@ -466,17 +466,17 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"content\": [\n        {\n            \"createdAt\": \"2022-08-18T00:18:38.000+00:00\",\n            \"updatedAt\": \"2022-08-18T00:19:05.000+00:00\",\n            \"id\": 1,\n            \"name\": \"h-index\"\n        }\n    ],\n    \"pageable\": {\n        \"sort\": {\n            \"empty\": true,\n            \"sorted\": false,\n            \"unsorted\": true\n        },\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 20,\n        \"paged\": true,\n        \"unpaged\": false\n    },\n    \"last\": true,\n    \"totalPages\": 1,\n    \"totalElements\": 1,\n    \"size\": 20,\n    \"number\": 0,\n    \"sort\": {\n        \"empty\": true,\n        \"sorted\": false,\n        \"unsorted\": true\n    },\n    \"first\": true,\n    \"numberOfElements\": 1,\n    \"empty\": false\n}"
+							"body": "{\n    \"content\": [\n        {\n            \"createdAt\": \"2022-08-18T23:07:44.000+00:00\",\n            \"updatedAt\": \"2022-08-18T23:08:00.000+00:00\",\n            \"id\": 1,\n            \"bibliometric\": \"h-index\",\n            \"score\": \"3.2\",\n            \"year\": 2022,\n            \"source\": \"scimago.com\"\n        }\n    ],\n    \"pageable\": {\n        \"sort\": {\n            \"empty\": true,\n            \"sorted\": false,\n            \"unsorted\": true\n        },\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 20,\n        \"paged\": true,\n        \"unpaged\": false\n    },\n    \"last\": true,\n    \"totalPages\": 1,\n    \"totalElements\": 1,\n    \"size\": 20,\n    \"number\": 0,\n    \"sort\": {\n        \"empty\": true,\n        \"sorted\": false,\n        \"unsorted\": true\n    },\n    \"first\": true,\n    \"numberOfElements\": 1,\n    \"empty\": false\n}"
 						}
 					]
 				},
 				{
-					"name": "GetBibliometricById",
+					"name": "GetMetricById",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/bibliometrics/1",
+							"raw": "http://localhost:8080/api/metrics/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -484,19 +484,19 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"bibliometrics",
+								"metrics",
 								"1"
 							]
 						}
 					},
 					"response": [
 						{
-							"name": "GetBibliometricById",
+							"name": "GetMetricById",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/api/bibliometrics/1",
+									"raw": "http://localhost:8080/api/metrics/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -504,7 +504,7 @@
 									"port": "8080",
 									"path": [
 										"api",
-										"bibliometrics",
+										"metrics",
 										"1"
 									]
 								}
@@ -535,7 +535,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Thu, 18 Aug 2022 00:19:20 GMT"
+									"value": "Thu, 18 Aug 2022 23:08:48 GMT"
 								},
 								{
 									"key": "Keep-Alive",
@@ -547,18 +547,18 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"createdAt\": \"2022-08-18T00:18:38.000+00:00\",\n    \"updatedAt\": \"2022-08-18T00:19:05.000+00:00\",\n    \"id\": 1,\n    \"name\": \"h-index\"\n}"
+							"body": "{\n    \"createdAt\": \"2022-08-18T23:07:44.000+00:00\",\n    \"updatedAt\": \"2022-08-18T23:08:00.000+00:00\",\n    \"id\": 1,\n    \"bibliometric\": \"h-index\",\n    \"score\": \"3.2\",\n    \"year\": 2022,\n    \"source\": \"scimago.com\"\n}"
 						}
 					]
 				},
 				{
-					"name": "CreateBibliometric",
+					"name": "CreateMetric",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Quartil\"\r\n}",
+							"raw": "{\r\n  \"bibliometric\": \"h-index\",\r\n  \"score\": \"3.2\",\r\n  \"year\": 2022,\r\n  \"source\": \"springer.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -566,7 +566,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/bibliometrics",
+							"raw": "http://localhost:8080/api/metrics",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -574,19 +574,19 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"bibliometrics"
+								"metrics"
 							]
 						}
 					},
 					"response": [
 						{
-							"name": "CreateBibliometric",
+							"name": "CreateMetric",
 							"originalRequest": {
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Quartil\"\r\n}",
+									"raw": "{\r\n  \"bibliometric\": \"quartil\",\r\n  \"score\": \"q1\",\r\n  \"year\": 2022,\r\n  \"source\": \"springer.com\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -594,7 +594,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/bibliometrics",
+									"raw": "http://localhost:8080/api/metrics",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -602,7 +602,7 @@
 									"port": "8080",
 									"path": [
 										"api",
-										"bibliometrics"
+										"metrics"
 									]
 								}
 							},
@@ -632,7 +632,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Thu, 18 Aug 2022 00:18:37 GMT"
+									"value": "Thu, 18 Aug 2022 23:08:56 GMT"
 								},
 								{
 									"key": "Keep-Alive",
@@ -644,18 +644,18 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"createdAt\": \"2022-08-18T00:18:37.954+00:00\",\n    \"updatedAt\": \"2022-08-18T00:18:37.954+00:00\",\n    \"id\": 1,\n    \"name\": \"Quartil\"\n}"
+							"body": "{\n    \"createdAt\": \"2022-08-18T23:08:56.922+00:00\",\n    \"updatedAt\": \"2022-08-18T23:08:56.922+00:00\",\n    \"id\": 3,\n    \"bibliometric\": \"quartil\",\n    \"score\": \"q1\",\n    \"year\": 2022,\n    \"source\": \"springer.com\"\n}"
 						}
 					]
 				},
 				{
-					"name": "UpdateBibliometric",
+					"name": "UpdateMetric",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"h-index\"\r\n}",
+							"raw": "{\r\n  \"bibliometric\": \"h-index\",\r\n  \"score\": \"3.2\",\r\n  \"year\": 2022,\r\n  \"source\": \"scimago.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -663,7 +663,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/bibliometrics/1",
+							"raw": "http://localhost:8080/api/metrics/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -671,20 +671,20 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"bibliometrics",
+								"metrics",
 								"1"
 							]
 						}
 					},
 					"response": [
 						{
-							"name": "UpdateBibliometric",
+							"name": "UpdateMetric",
 							"originalRequest": {
 								"method": "PUT",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"h-index\"\r\n}",
+									"raw": "{\r\n  \"bibliometric\": \"h-index\",\r\n  \"score\": \"3.2\",\r\n  \"year\": 2022,\r\n  \"source\": \"scimago.com\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -692,7 +692,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/bibliometrics/1",
+									"raw": "http://localhost:8080/api/metrics/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -700,7 +700,7 @@
 									"port": "8080",
 									"path": [
 										"api",
-										"bibliometrics",
+										"metrics",
 										"1"
 									]
 								}
@@ -731,7 +731,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Thu, 18 Aug 2022 00:19:05 GMT"
+									"value": "Thu, 18 Aug 2022 23:08:00 GMT"
 								},
 								{
 									"key": "Keep-Alive",
@@ -743,17 +743,17 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"createdAt\": \"2022-08-18T00:18:38.000+00:00\",\n    \"updatedAt\": \"2022-08-18T00:19:05.183+00:00\",\n    \"id\": 1,\n    \"name\": \"h-index\"\n}"
+							"body": "{\n    \"createdAt\": \"2022-08-18T23:07:44.000+00:00\",\n    \"updatedAt\": \"2022-08-18T23:08:00.113+00:00\",\n    \"id\": 1,\n    \"bibliometric\": \"h-index\",\n    \"score\": \"3.2\",\n    \"year\": 2022,\n    \"source\": \"scimago.com\"\n}"
 						}
 					]
 				},
 				{
-					"name": "DeleteBibliometric",
+					"name": "DeleteMetric",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/bibliometrics/1",
+							"raw": "http://localhost:8080/api/metrics/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -761,8 +761,8 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"bibliometrics",
-								"1"
+								"metrics",
+								"2"
 							]
 						}
 					},
