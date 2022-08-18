@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Tag(name = "Articles", description = "Articles API")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/articles")
 @CrossOrigin
 public class ArticleController {
 
@@ -29,7 +29,7 @@ public class ArticleController {
     @Autowired
     private ModelMapper mapper;
 
-    @GetMapping("/articles")
+    @GetMapping("")
     public Page<ArticleResource> getAllArticles(Pageable pageable){
         Page<Article> articlePage = articleService.getAllArticles(pageable);
         List<ArticleResource> resources = articlePage.getContent()
@@ -38,25 +38,25 @@ public class ArticleController {
         return new PageImpl<>(resources, pageable, resources.size());
     }
 
-    @GetMapping("/articles/{articleId}")
+    @GetMapping("/{articleId}")
     public ArticleResource getArticleById(@PathVariable(name = "articleId") Long articleId){
         return convertToResource(articleService.getArticleById(articleId));
     }
 
-    @PostMapping("/articles")
+    @PostMapping("")
     public ArticleResource createArticle(@Valid @RequestBody SaveArticleResource resource){
         Article article = convertToEntity(resource);
         return convertToResource(articleService.createArticle(article));
     }
 
-    @PutMapping("/articles/{articleId}")
+    @PutMapping("/{articleId}")
     public ArticleResource updateArticle(@PathVariable(name = "articleId") Long articleId,
             @Valid @RequestBody SaveArticleResource resource){
         Article article = convertToEntity(resource);
         return convertToResource(articleService.updateArticle(articleId, article));
     }
 
-    @DeleteMapping("/articles/{articleId}")
+    @DeleteMapping("/{articleId}")
     public ResponseEntity<?> deleteArticle(@PathVariable(name = "articleId") Long articleId){
         return articleService.deleteArticle(articleId);
     }
