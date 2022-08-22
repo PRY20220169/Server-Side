@@ -39,7 +39,6 @@ public class AuthorServiceImpl implements AuthorService {
             author.setAddress(authorDetails.getAddress());
             author.setEmail(authorDetails.getEmail());
             author.setOrganizations(authorDetails.getOrganizations());
-            author.setMetrics(authorDetails.getMetrics());
             return authorRepository.save(author);
         }).orElseThrow(() -> new ResourceNotFoundException("Authors", "Id", authorId));
     }
