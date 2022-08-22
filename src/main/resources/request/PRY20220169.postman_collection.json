@@ -7,6 +7,788 @@
 	},
 	"item": [
 		{
+			"name": "Authors",
+			"item": [
+				{
+					"name": "GetAllAuthors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/authors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"authors"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GetAllAuthors",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/authors",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"authors"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Aug 2022 15:25:51 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [\n        {\n            \"createdAt\": \"2022-08-22T15:25:23.000+00:00\",\n            \"updatedAt\": \"2022-08-22T15:25:37.000+00:00\",\n            \"id\": 1,\n            \"firstName\": \"Mario\",\n            \"lastName\": \"Vargas Llosa\",\n            \"address\": \"Lima\",\n            \"email\": \"mvl@peru.com\",\n            \"organizations\": [\n                \"Gobierno Peruano\"\n            ],\n            \"metrics\": [\n                {\n                    \"createdAt\": \"2022-08-22T15:25:23.000+00:00\",\n                    \"updatedAt\": \"2022-08-22T15:25:23.000+00:00\",\n                    \"id\": 1,\n                    \"bibliometric\": \"h-index\",\n                    \"score\": \"5.0\",\n                    \"year\": 2022,\n                    \"source\": \"peru.com\"\n                }\n            ]\n        }\n    ],\n    \"pageable\": {\n        \"sort\": {\n            \"empty\": true,\n            \"sorted\": false,\n            \"unsorted\": true\n        },\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 20,\n        \"paged\": true,\n        \"unpaged\": false\n    },\n    \"last\": true,\n    \"totalPages\": 1,\n    \"totalElements\": 1,\n    \"size\": 20,\n    \"number\": 0,\n    \"sort\": {\n        \"empty\": true,\n        \"sorted\": false,\n        \"unsorted\": true\n    },\n    \"first\": true,\n    \"numberOfElements\": 1,\n    \"empty\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "GetAuthorById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/authors/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"authors",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GetAuthorById",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/authors/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"authors",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Aug 2022 15:25:47 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"createdAt\": \"2022-08-22T15:25:23.000+00:00\",\n    \"updatedAt\": \"2022-08-22T15:25:37.000+00:00\",\n    \"id\": 1,\n    \"firstName\": \"Mario\",\n    \"lastName\": \"Vargas Llosa\",\n    \"address\": \"Lima\",\n    \"email\": \"mvl@peru.com\",\n    \"organizations\": [\n        \"Gobierno Peruano\"\n    ],\n    \"metrics\": [\n        {\n            \"createdAt\": \"2022-08-22T15:25:23.000+00:00\",\n            \"updatedAt\": \"2022-08-22T15:25:23.000+00:00\",\n            \"id\": 1,\n            \"bibliometric\": \"h-index\",\n            \"score\": \"5.0\",\n            \"year\": 2022,\n            \"source\": \"peru.com\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "CreateAuthor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Mario\",\r\n  \"lastName\": \"Vargas Llosa\",\r\n  \"address\": \"Lima\",\r\n  \"email\": \"mvl@peru.com\",\r\n  \"organizations\": [\r\n    \"Gobierno Peruano\"\r\n  ],\r\n  \"metrics\": [\r\n    {\r\n      \"bibliometric\": \"h-index\",\r\n      \"score\": \"5.0\",\r\n      \"year\": 2022,\r\n      \"source\": \"peru.com\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/authors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"authors"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "CreateAuthor",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"firstName\": \"Mario\",\r\n  \"lastName\": \"Vargas Llosa\",\r\n  \"address\": \"Lima\",\r\n  \"email\": \"mvl@peru.com\",\r\n  \"organizations\": [\r\n    \"Gobierno Peruano\"\r\n  ],\r\n  \"metrics\": [\r\n    {\r\n      \"bibliometric\": \"h-index\",\r\n      \"score\": \"5.0\",\r\n      \"year\": 2022,\r\n      \"source\": \"peru.com\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/authors",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"authors"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Aug 2022 15:25:22 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"createdAt\": \"2022-08-22T15:25:22.561+00:00\",\n    \"updatedAt\": \"2022-08-22T15:25:22.561+00:00\",\n    \"id\": 1,\n    \"firstName\": \"Mario\",\n    \"lastName\": \"Vargas Llosa\",\n    \"address\": \"Lima\",\n    \"email\": \"mvl@peru.com\",\n    \"organizations\": [\n        \"Gobierno Peruano\"\n    ],\n    \"metrics\": [\n        {\n            \"createdAt\": \"2022-08-22T15:25:22.627+00:00\",\n            \"updatedAt\": \"2022-08-22T15:25:22.627+00:00\",\n            \"id\": 1,\n            \"bibliometric\": \"h-index\",\n            \"score\": \"5.0\",\n            \"year\": 2022,\n            \"source\": \"peru.com\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "UpdateAuthor",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Mario\",\r\n  \"lastName\": \"Vargas Llosa\",\r\n  \"address\": \"Lima\",\r\n  \"email\": \"mvl@peru.com\",\r\n  \"organizations\": [\r\n    \"Gobierno Peruano\"\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/authors/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"authors",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "UpdateAuthor",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"firstName\": \"Mario\",\r\n  \"lastName\": \"Vargas Llosa\",\r\n  \"address\": \"Lima\",\r\n  \"email\": \"mvl@peru.com\",\r\n  \"organizations\": [\r\n    \"Gobierno Peruano\"\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/authors/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"authors",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Aug 2022 15:25:36 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"createdAt\": \"2022-08-22T15:25:23.000+00:00\",\n    \"updatedAt\": \"2022-08-22T15:25:36.940+00:00\",\n    \"id\": 1,\n    \"firstName\": \"Mario\",\n    \"lastName\": \"Vargas Llosa\",\n    \"address\": \"Lima\",\n    \"email\": \"mvl@peru.com\",\n    \"organizations\": [\n        \"Gobierno Peruano\"\n    ],\n    \"metrics\": [\n        {\n            \"createdAt\": \"2022-08-22T15:25:23.000+00:00\",\n            \"updatedAt\": \"2022-08-22T15:25:23.000+00:00\",\n            \"id\": 1,\n            \"bibliometric\": \"h-index\",\n            \"score\": \"5.0\",\n            \"year\": 2022,\n            \"source\": \"peru.com\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "DeleteAuthor",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Mario\",\r\n  \"lastName\": \"Vargas Llosa\",\r\n  \"address\": \"Lima\",\r\n  \"email\": \"mvl@peru.com\",\r\n  \"organizations\": [\r\n    \"Gobierno Peruano\"\r\n  ],\r\n  \"metrics\": [\r\n    {\r\n      \"bibliometric\": \"h-index\",\r\n      \"score\": \"4.0\",\r\n      \"year\": 2022,\r\n      \"source\": \"peru.com\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/authors/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"authors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Journals",
+			"item": [
+				{
+					"name": "GetAllJournals",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/journals",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"journals"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GetAllJournals",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/journals",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"journals"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Aug 2022 15:28:59 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [\n        {\n            \"createdAt\": \"2022-08-22T15:28:11.000+00:00\",\n            \"updatedAt\": \"2022-08-22T15:28:47.000+00:00\",\n            \"id\": 1,\n            \"name\": \"Journal 2\",\n            \"metrics\": [\n                {\n                    \"createdAt\": \"2022-08-22T15:28:11.000+00:00\",\n                    \"updatedAt\": \"2022-08-22T15:28:11.000+00:00\",\n                    \"id\": 2,\n                    \"bibliometric\": \"h-index\",\n                    \"score\": \"4.5\",\n                    \"year\": 2022,\n                    \"source\": \"journal.com\"\n                }\n            ]\n        }\n    ],\n    \"pageable\": {\n        \"sort\": {\n            \"empty\": true,\n            \"sorted\": false,\n            \"unsorted\": true\n        },\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 20,\n        \"paged\": true,\n        \"unpaged\": false\n    },\n    \"last\": true,\n    \"totalPages\": 1,\n    \"totalElements\": 1,\n    \"size\": 20,\n    \"number\": 0,\n    \"sort\": {\n        \"empty\": true,\n        \"sorted\": false,\n        \"unsorted\": true\n    },\n    \"first\": true,\n    \"numberOfElements\": 1,\n    \"empty\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "GetJournalById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/journals/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"journals",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GetJournalById",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/journals/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"journals",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Aug 2022 15:29:03 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"createdAt\": \"2022-08-22T15:28:11.000+00:00\",\n    \"updatedAt\": \"2022-08-22T15:28:47.000+00:00\",\n    \"id\": 1,\n    \"name\": \"Journal 2\",\n    \"metrics\": [\n        {\n            \"createdAt\": \"2022-08-22T15:28:11.000+00:00\",\n            \"updatedAt\": \"2022-08-22T15:28:11.000+00:00\",\n            \"id\": 2,\n            \"bibliometric\": \"h-index\",\n            \"score\": \"4.5\",\n            \"year\": 2022,\n            \"source\": \"journal.com\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "CreateJournal",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Journal 1\",\r\n  \"metrics\": [\r\n    {\r\n      \"bibliometric\": \"h-index\",\r\n      \"score\": \"4.5\",\r\n      \"year\": 2022,\r\n      \"source\": \"journal.com\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/journals",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"journals"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "CreateJournal",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Journal 1\",\r\n  \"metrics\": [\r\n    {\r\n      \"bibliometric\": \"h-index\",\r\n      \"score\": \"4.5\",\r\n      \"year\": 2022,\r\n      \"source\": \"journal.com\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/journals",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"journals"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Aug 2022 15:28:11 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"createdAt\": \"2022-08-22T15:28:11.307+00:00\",\n    \"updatedAt\": \"2022-08-22T15:28:11.307+00:00\",\n    \"id\": 1,\n    \"name\": \"Journal 1\",\n    \"metrics\": [\n        {\n            \"createdAt\": \"2022-08-22T15:28:11.313+00:00\",\n            \"updatedAt\": \"2022-08-22T15:28:11.313+00:00\",\n            \"id\": 2,\n            \"bibliometric\": \"h-index\",\n            \"score\": \"4.5\",\n            \"year\": 2022,\n            \"source\": \"journal.com\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "UpdateJournal",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Journal 2\",\r\n  \"metrics\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/journals/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"journals",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "UpdateJournal",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Journal 2\",\r\n  \"metrics\": []\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/journals/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"journals",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Aug 2022 15:28:46 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"createdAt\": \"2022-08-22T15:28:11.000+00:00\",\n    \"updatedAt\": \"2022-08-22T15:28:46.951+00:00\",\n    \"id\": 1,\n    \"name\": \"Journal 2\",\n    \"metrics\": [\n        {\n            \"createdAt\": \"2022-08-22T15:28:11.000+00:00\",\n            \"updatedAt\": \"2022-08-22T15:28:11.000+00:00\",\n            \"id\": 2,\n            \"bibliometric\": \"h-index\",\n            \"score\": \"4.5\",\n            \"year\": 2022,\n            \"source\": \"journal.com\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "DeleteAuthor",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Mario\",\r\n  \"lastName\": \"Vargas Llosa\",\r\n  \"address\": \"Lima\",\r\n  \"email\": \"mvl@peru.com\",\r\n  \"organizations\": [\r\n    \"Gobierno Peruano\"\r\n  ],\r\n  \"metrics\": [\r\n    {\r\n      \"bibliometric\": \"h-index\",\r\n      \"score\": \"4.0\",\r\n      \"year\": 2022,\r\n      \"source\": \"peru.com\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/journals/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"journals",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Articles",
 			"item": [
 				{
@@ -176,7 +958,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Article 1\",\r\n    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\r\n    \"description\": \"Description of Article 1\",\r\n    \"keywords\": [\"Innovation\", \"Machine Learning\"],\r\n    \"categories\": [\"Science\", \"Technology\"],\r\n    \"numberOfCitation\": 2,\r\n    \"numberOfReferences\": 5\r\n}",
+							"raw": "{\r\n    \"title\": \"Article 2\",\r\n    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\r\n    \"description\": \"Description of Article 1\",\r\n    \"keywords\": [\"Innovation\", \"Machine Learning\"],\r\n    \"categories\": [\"Science\", \"Technology\"],\r\n    \"numberOfCitation\": 2,\r\n    \"numberOfReferences\": 5\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -371,7 +1153,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/articles/2",
+							"raw": "http://localhost:8080/api/articles/3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -380,7 +1162,7 @@
 							"path": [
 								"api",
 								"articles",
-								"2"
+								"3"
 							]
 						}
 					},
@@ -558,7 +1340,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"bibliometric\": \"h-index\",\r\n  \"score\": \"3.2\",\r\n  \"year\": 2022,\r\n  \"source\": \"springer.com\"\r\n}",
+							"raw": "{\r\n  \"bibliometric\": \"quartil\",\r\n  \"score\": \"q1\",\r\n  \"year\": 2022,\r\n  \"source\": \"springer.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
