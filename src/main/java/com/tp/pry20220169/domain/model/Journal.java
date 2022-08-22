@@ -8,33 +8,18 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
-@Table(name = "authors")
+@Table(name = "journals")
 @Data
-public class Author extends AuditModel{
+public class Journal extends AuditModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
     @NotBlank
-    private String firstName;
-
-    @NotNull
-    @NotBlank
-    private String lastName;
-
-    @NotNull
-    @NotBlank
-    private String address;
-
-    @NotNull
-    @NotBlank
-    private String email;
-
-    @ElementCollection
-    private List<String> organizations;
+    private String name;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "author_id")
+    @JoinColumn(name = "journal_id")
     private List<Metric> metrics;
 }
