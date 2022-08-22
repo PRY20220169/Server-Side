@@ -34,7 +34,7 @@ public class Author extends AuditModel{
     @ElementCollection
     private List<String> organizations;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "author_id", nullable = false)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id")
     private List<Metric> metrics;
 }
