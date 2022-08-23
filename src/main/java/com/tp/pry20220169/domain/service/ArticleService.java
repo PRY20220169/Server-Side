@@ -12,6 +12,9 @@ public interface ArticleService {
     Article updateArticle(Long articleId, Article articleDetails);
     ResponseEntity<?> deleteArticle(Long articleId);
 
+    Article addArticleAuthor(Long articleId, Long authorId);
+    Article removeArticleAuthor(Long articleId, Long authorId);
+    Page<Article> getAllArticlesByAuthorId(Long authorId, Pageable pageable);
     // TODO: Implement more methods
 
 }

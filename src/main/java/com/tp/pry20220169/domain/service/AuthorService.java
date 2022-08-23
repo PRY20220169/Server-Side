@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 
 public interface AuthorService {
     Page<Author> getAllAuthors(Pageable pageable);
+    Page<Author> getAllAuthorsByArticleId(Long articleId, Pageable pageable);
     Author getAuthorById(Long authorId);
     Author createAuthor(Author author);
     Author updateAuthor(Long authorId, Author authorDetails);
