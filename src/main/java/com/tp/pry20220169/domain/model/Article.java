@@ -1,5 +1,6 @@
 package com.tp.pry20220169.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -20,7 +21,25 @@ public class Article extends AuditModel{
     @NotBlank
     private String title;
 
-    //TODO: Implement Authors: List<Author> / Many to many relation
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "article_authors",
+    joinColumns = {@JoinColumn(name = "article_id")},
+    inverseJoinColumns = {@JoinColumn(name = "author_id")})
+    @JsonIgnore
+    private List<Author> authors;
+
+    public boolean hasAuthor(Author author) { return (this.getAuthors().contains(author)); }
+
+    public Article addAuthor(Author author) {
+        if(!this.hasAuthor(author)){ this.getAuthors().add(author); }
+        return this;
+    }
+
+    public Article removeAuthor(Author author) {
+        if(this.hasAuthor(author)){ this.getAuthors().remove(author); }
+        return this;
+    }
 
     //TODO: Implement Conference: Conference / Many to one relation (Conference has many articles, articles belong to one conference)
 

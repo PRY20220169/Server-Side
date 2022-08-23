@@ -1,5 +1,6 @@
 package com.tp.pry20220169.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -37,4 +38,10 @@ public class Author extends AuditModel{
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
     private List<Metric> metrics;
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            mappedBy = "authors")
+    @JsonIgnore
+    private List<Article> articles;
 }

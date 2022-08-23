@@ -1,23 +1,40 @@
 package com.tp.pry20220169.service;
 
+import com.tp.pry20220169.domain.model.Article;
 import com.tp.pry20220169.domain.model.Author;
+import com.tp.pry20220169.domain.repository.ArticleRepository;
 import com.tp.pry20220169.domain.repository.AuthorRepository;
 import com.tp.pry20220169.domain.service.AuthorService;
 import com.tp.pry20220169.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
     @Autowired
     private AuthorRepository authorRepository;
 
+    @Autowired
+    private ArticleRepository articleRepository;
+
     @Override
     public Page<Author> getAllAuthors(Pageable pageable) {
         return authorRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Author> getAllAuthorsByArticleId(Long articleId, Pageable pageable) {
+        return articleRepository.findById(articleId).map(article -> {
+            List<Author> authors = article.getAuthors();
+            int authorsCount = authors.size();
+            return new PageImpl<>(authors, pageable, authorsCount);
+        }).orElseThrow(() -> new ResourceNotFoundException("Article", "Id", articleId));
     }
 
     @Override
