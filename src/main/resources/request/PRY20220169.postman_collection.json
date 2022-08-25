@@ -398,6 +398,461 @@
 			]
 		},
 		{
+			"name": "Articles",
+			"item": [
+				{
+					"name": "GetAllArticles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/articles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"articles"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GetAllArticles",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/articles",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"articles"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Aug 2022 22:08:06 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [\n        {\n            \"createdAt\": \"2022-08-17T22:05:20.000+00:00\",\n            \"updatedAt\": \"2022-08-17T22:07:23.000+00:00\",\n            \"id\": 1,\n            \"title\": \"Article 69\",\n            \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\n            \"description\": \"Description of Article 1\",\n            \"keywords\": [\n                \"Innovation\",\n                \"Machine Learning\"\n            ],\n            \"categories\": [\n                \"Science\",\n                \"Technology\"\n            ],\n            \"numberOfCitations\": 0,\n            \"numberOfReferences\": 5\n        }\n    ],\n    \"pageable\": {\n        \"sort\": {\n            \"empty\": true,\n            \"sorted\": false,\n            \"unsorted\": true\n        },\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 20,\n        \"paged\": true,\n        \"unpaged\": false\n    },\n    \"last\": true,\n    \"totalPages\": 1,\n    \"totalElements\": 1,\n    \"size\": 20,\n    \"number\": 0,\n    \"sort\": {\n        \"empty\": true,\n        \"sorted\": false,\n        \"unsorted\": true\n    },\n    \"first\": true,\n    \"numberOfElements\": 1,\n    \"empty\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "GetArticleById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/articles/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"articles",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GetArticleById",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/articles/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"articles",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Aug 2022 22:11:51 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"createdAt\": \"2022-08-17T22:05:20.000+00:00\",\n    \"updatedAt\": \"2022-08-17T22:07:23.000+00:00\",\n    \"id\": 1,\n    \"title\": \"Article 69\",\n    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\n    \"description\": \"Description of Article 1\",\n    \"keywords\": [\n        \"Innovation\",\n        \"Machine Learning\"\n    ],\n    \"categories\": [\n        \"Science\",\n        \"Technology\"\n    ],\n    \"numberOfCitations\": 0,\n    \"numberOfReferences\": 5\n}"
+						}
+					]
+				},
+				{
+					"name": "CreateArticle",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Article 2\",\r\n    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\r\n    \"description\": \"Description of Article 1\",\r\n    \"keywords\": [\"Innovation\", \"Machine Learning\"],\r\n    \"categories\": [\"Science\", \"Technology\"],\r\n    \"numberOfCitation\": 2,\r\n    \"numberOfReferences\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/articles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"articles"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "CreateArticle",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Article 1\",\r\n    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\r\n    \"description\": \"Description of Article 1\",\r\n    \"keywords\": [\"Innovation\", \"Machine Learning\"],\r\n    \"categories\": [\"Science\", \"Technology\"],\r\n    \"numberOfCitation\": 2,\r\n    \"numberOfReferences\": 5\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/articles",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"articles"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Aug 2022 22:07:57 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"createdAt\": \"2022-08-17T22:07:57.202+00:00\",\n    \"updatedAt\": \"2022-08-17T22:07:57.202+00:00\",\n    \"id\": 2,\n    \"title\": \"Article 2\",\n    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\n    \"description\": \"Description of Article 1\",\n    \"keywords\": [\n        \"Innovation\",\n        \"Machine Learning\"\n    ],\n    \"categories\": [\n        \"Science\",\n        \"Technology\"\n    ],\n    \"numberOfCitations\": 0,\n    \"numberOfReferences\": 5\n}"
+						}
+					]
+				},
+				{
+					"name": "UpdateArticle",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Article 69\",\r\n    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\r\n    \"description\": \"Description of Article 1\",\r\n    \"keywords\": [\"Innovation\", \"Machine Learning\"],\r\n    \"categories\": [\"Science\", \"Technology\"],\r\n    \"numberOfCitation\": 2,\r\n    \"numberOfReferences\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/articles/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"articles",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "UpdateArticle",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Article 69\",\r\n    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\r\n    \"description\": \"Description of Article 1\",\r\n    \"keywords\": [\"Innovation\", \"Machine Learning\"],\r\n    \"categories\": [\"Science\", \"Technology\"],\r\n    \"numberOfCitation\": 2,\r\n    \"numberOfReferences\": 5\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/articles/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"articles",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Aug 2022 22:07:23 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"createdAt\": \"2022-08-17T22:05:20.000+00:00\",\n    \"updatedAt\": \"2022-08-17T22:07:23.486+00:00\",\n    \"id\": 1,\n    \"title\": \"Article 69\",\n    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\n    \"description\": \"Description of Article 1\",\n    \"keywords\": [\n        \"Innovation\",\n        \"Machine Learning\"\n    ],\n    \"categories\": [\n        \"Science\",\n        \"Technology\"\n    ],\n    \"numberOfCitations\": 0,\n    \"numberOfReferences\": 5\n}"
+						}
+					]
+				},
+				{
+					"name": "DeleteArticle",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/articles/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"articles",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ArticleAuthors",
+			"item": [
+				{
+					"name": "GetAuthorsByArticleId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/articles/1/authors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"articles",
+								"1",
+								"authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddArticleAuthor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/articles/1/authors/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"articles",
+								"1",
+								"authors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RemoveArticleAuthor",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/articles/1/authors/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"articles",
+								"1",
+								"authors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Journals",
 			"item": [
 				{
@@ -789,388 +1244,6 @@
 			]
 		},
 		{
-			"name": "Articles",
-			"item": [
-				{
-					"name": "GetAllArticles",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/articles",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"articles"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "GetAllArticles",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8080/api/articles",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"api",
-										"articles"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Vary",
-									"value": "Origin"
-								},
-								{
-									"key": "Vary",
-									"value": "Access-Control-Request-Method"
-								},
-								{
-									"key": "Vary",
-									"value": "Access-Control-Request-Headers"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked"
-								},
-								{
-									"key": "Date",
-									"value": "Wed, 17 Aug 2022 22:08:06 GMT"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=60"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"content\": [\n        {\n            \"createdAt\": \"2022-08-17T22:05:20.000+00:00\",\n            \"updatedAt\": \"2022-08-17T22:07:23.000+00:00\",\n            \"id\": 1,\n            \"title\": \"Article 69\",\n            \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\n            \"description\": \"Description of Article 1\",\n            \"keywords\": [\n                \"Innovation\",\n                \"Machine Learning\"\n            ],\n            \"categories\": [\n                \"Science\",\n                \"Technology\"\n            ],\n            \"numberOfCitations\": 0,\n            \"numberOfReferences\": 5\n        }\n    ],\n    \"pageable\": {\n        \"sort\": {\n            \"empty\": true,\n            \"sorted\": false,\n            \"unsorted\": true\n        },\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 20,\n        \"paged\": true,\n        \"unpaged\": false\n    },\n    \"last\": true,\n    \"totalPages\": 1,\n    \"totalElements\": 1,\n    \"size\": 20,\n    \"number\": 0,\n    \"sort\": {\n        \"empty\": true,\n        \"sorted\": false,\n        \"unsorted\": true\n    },\n    \"first\": true,\n    \"numberOfElements\": 1,\n    \"empty\": false\n}"
-						}
-					]
-				},
-				{
-					"name": "GetArticleById",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/articles/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"articles",
-								"1"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "GetArticleById",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8080/api/articles/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"api",
-										"articles",
-										"1"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Vary",
-									"value": "Origin"
-								},
-								{
-									"key": "Vary",
-									"value": "Access-Control-Request-Method"
-								},
-								{
-									"key": "Vary",
-									"value": "Access-Control-Request-Headers"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked"
-								},
-								{
-									"key": "Date",
-									"value": "Wed, 17 Aug 2022 22:11:51 GMT"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=60"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"createdAt\": \"2022-08-17T22:05:20.000+00:00\",\n    \"updatedAt\": \"2022-08-17T22:07:23.000+00:00\",\n    \"id\": 1,\n    \"title\": \"Article 69\",\n    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\n    \"description\": \"Description of Article 1\",\n    \"keywords\": [\n        \"Innovation\",\n        \"Machine Learning\"\n    ],\n    \"categories\": [\n        \"Science\",\n        \"Technology\"\n    ],\n    \"numberOfCitations\": 0,\n    \"numberOfReferences\": 5\n}"
-						}
-					]
-				},
-				{
-					"name": "CreateArticle",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Article 2\",\r\n    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\r\n    \"description\": \"Description of Article 1\",\r\n    \"keywords\": [\"Innovation\", \"Machine Learning\"],\r\n    \"categories\": [\"Science\", \"Technology\"],\r\n    \"numberOfCitation\": 2,\r\n    \"numberOfReferences\": 5\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/articles",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"articles"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "CreateArticle",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"Article 1\",\r\n    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\r\n    \"description\": \"Description of Article 1\",\r\n    \"keywords\": [\"Innovation\", \"Machine Learning\"],\r\n    \"categories\": [\"Science\", \"Technology\"],\r\n    \"numberOfCitation\": 2,\r\n    \"numberOfReferences\": 5\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/api/articles",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"api",
-										"articles"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Vary",
-									"value": "Origin"
-								},
-								{
-									"key": "Vary",
-									"value": "Access-Control-Request-Method"
-								},
-								{
-									"key": "Vary",
-									"value": "Access-Control-Request-Headers"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked"
-								},
-								{
-									"key": "Date",
-									"value": "Wed, 17 Aug 2022 22:07:57 GMT"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=60"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"createdAt\": \"2022-08-17T22:07:57.202+00:00\",\n    \"updatedAt\": \"2022-08-17T22:07:57.202+00:00\",\n    \"id\": 2,\n    \"title\": \"Article 2\",\n    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\n    \"description\": \"Description of Article 1\",\n    \"keywords\": [\n        \"Innovation\",\n        \"Machine Learning\"\n    ],\n    \"categories\": [\n        \"Science\",\n        \"Technology\"\n    ],\n    \"numberOfCitations\": 0,\n    \"numberOfReferences\": 5\n}"
-						}
-					]
-				},
-				{
-					"name": "UpdateArticle",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Article 69\",\r\n    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\r\n    \"description\": \"Description of Article 1\",\r\n    \"keywords\": [\"Innovation\", \"Machine Learning\"],\r\n    \"categories\": [\"Science\", \"Technology\"],\r\n    \"numberOfCitation\": 2,\r\n    \"numberOfReferences\": 5\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/articles/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"articles",
-								"1"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "UpdateArticle",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"Article 69\",\r\n    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\r\n    \"description\": \"Description of Article 1\",\r\n    \"keywords\": [\"Innovation\", \"Machine Learning\"],\r\n    \"categories\": [\"Science\", \"Technology\"],\r\n    \"numberOfCitation\": 2,\r\n    \"numberOfReferences\": 5\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/api/articles/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"api",
-										"articles",
-										"1"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Vary",
-									"value": "Origin"
-								},
-								{
-									"key": "Vary",
-									"value": "Access-Control-Request-Method"
-								},
-								{
-									"key": "Vary",
-									"value": "Access-Control-Request-Headers"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked"
-								},
-								{
-									"key": "Date",
-									"value": "Wed, 17 Aug 2022 22:07:23 GMT"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=60"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"createdAt\": \"2022-08-17T22:05:20.000+00:00\",\n    \"updatedAt\": \"2022-08-17T22:07:23.486+00:00\",\n    \"id\": 1,\n    \"title\": \"Article 69\",\n    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\n    \"description\": \"Description of Article 1\",\n    \"keywords\": [\n        \"Innovation\",\n        \"Machine Learning\"\n    ],\n    \"categories\": [\n        \"Science\",\n        \"Technology\"\n    ],\n    \"numberOfCitations\": 0,\n    \"numberOfReferences\": 5\n}"
-						}
-					]
-				},
-				{
-					"name": "DeleteArticle",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/articles/3",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"articles",
-								"3"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "Metrics",
 			"item": [
 				{
@@ -1545,6 +1618,388 @@
 								"api",
 								"metrics",
 								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Conferences",
+			"item": [
+				{
+					"name": "GetAllConferences",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/conferences",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"conferences"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GetAllConferences",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/conferences",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"conferences"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 25 Aug 2022 23:11:02 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [\n        {\n            \"createdAt\": \"2022-08-25T23:10:51.000+00:00\",\n            \"updatedAt\": \"2022-08-25T23:10:51.000+00:00\",\n            \"id\": 1,\n            \"meetingName\": \"Academic Apex\",\n            \"date\": \"2022-08-25T23:08:39.000+00:00\"\n        }\n    ],\n    \"pageable\": {\n        \"sort\": {\n            \"empty\": true,\n            \"sorted\": false,\n            \"unsorted\": true\n        },\n        \"offset\": 0,\n        \"pageSize\": 20,\n        \"pageNumber\": 0,\n        \"paged\": true,\n        \"unpaged\": false\n    },\n    \"last\": true,\n    \"totalElements\": 1,\n    \"totalPages\": 1,\n    \"size\": 20,\n    \"number\": 0,\n    \"sort\": {\n        \"empty\": true,\n        \"sorted\": false,\n        \"unsorted\": true\n    },\n    \"numberOfElements\": 1,\n    \"first\": true,\n    \"empty\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "GetConferenceById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/conferences/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"conferences",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GetConferenceById",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/conferences/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"conferences",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 25 Aug 2022 23:10:53 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"createdAt\": \"2022-08-25T23:10:51.000+00:00\",\n    \"updatedAt\": \"2022-08-25T23:10:51.000+00:00\",\n    \"id\": 1,\n    \"meetingName\": \"Academic Apex\",\n    \"date\": \"2022-08-25T23:08:39.000+00:00\"\n}"
+						}
+					]
+				},
+				{
+					"name": "CreateConference",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"meetingName\": \"Academic Apex\",\r\n  \"date\": \"2022-08-25T23:08:38.831Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/conferences",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"conferences"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "CreateConference",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"meetingName\": \"Academic Apex\",\r\n  \"date\": \"2022-08-25T23:08:38.831Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/conferences",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"conferences"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 25 Aug 2022 23:08:57 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"createdAt\": \"2022-08-25T23:08:57.454+00:00\",\n    \"updatedAt\": \"2022-08-25T23:08:57.454+00:00\",\n    \"id\": 2,\n    \"meetingName\": \"Academic Apex\",\n    \"date\": \"2022-08-25T23:08:38.831+00:00\"\n}"
+						}
+					]
+				},
+				{
+					"name": "UpdateConferences",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"meetingName\": \"Research Apex 2022\",\r\n  \"date\": \"2022-08-25T23:08:38.831Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/conferences/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"conferences",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "UpdateConferences",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"meetingName\": \"Research Apex 2022\",\r\n  \"date\": \"2022-08-25T23:08:38.831Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/conferences/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"conferences",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 25 Aug 2022 23:11:25 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"createdAt\": \"2022-08-25T23:10:51.000+00:00\",\n    \"updatedAt\": \"2022-08-25T23:11:25.987+00:00\",\n    \"id\": 1,\n    \"meetingName\": \"Research Apex 2022\",\n    \"date\": \"2022-08-25T23:08:38.831+00:00\"\n}"
+						}
+					]
+				},
+				{
+					"name": "DeleteConferences",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/conferences/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"conferences",
+								"1"
 							]
 						}
 					},
