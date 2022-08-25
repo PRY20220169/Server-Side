@@ -1,6 +1,5 @@
 package com.tp.pry20220169.resource;
 
-import com.tp.pry20220169.domain.model.Metric;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
