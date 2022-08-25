@@ -1,6 +1,5 @@
 package com.tp.pry20220169.service;
 
-import com.tp.pry20220169.domain.model.Article;
 import com.tp.pry20220169.domain.model.Author;
 import com.tp.pry20220169.domain.repository.ArticleRepository;
 import com.tp.pry20220169.domain.repository.AuthorRepository;
