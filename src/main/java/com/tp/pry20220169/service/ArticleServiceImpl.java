@@ -13,7 +13,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -37,6 +40,46 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Article createArticle(Article article) {
         return articleRepository.save(article);
+    }
+
+    @Override
+    public List<Article> createArticleFromRPA(List<Map<String, String>> articleParamsList) {
+        List<Article> newArticlesList = new ArrayList<>();
+
+        for (Map<String, String> articleParams : articleParamsList) {
+            Article newArticle = new Article();
+            System.out.println(articleParams);
+            // Set Article Title
+            newArticle.setTitle(articleParams.get("Article_Title"));
+
+            // Set Article Date
+//            String dateInString = articleParams.get("date"); //Format: Mar 2013
+//            dateInString = dateInString.replaceAll("[^0-9a-zA-Z:,]+", "");
+//
+//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM yyyy", Locale.ENGLISH);
+//            LocalDate localDate = LocalDate.parse(dateInString, formatter);
+//            Date dateTime = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+//            newArticle.setPublicationDate(dateTime);
+
+            // Set Article Description
+            newArticle.setDescription(articleParams.get("summary"));
+
+            // Set Article Metrics
+            String metricsString = articleParams.get("metrics").replaceAll("\\n", ",");
+            List<String> metricsList = Arrays.asList(metricsString.split("\\s*,\\s*"));
+            int numberOfCitations = Integer.parseInt(metricsList.get(0));
+            int numberOfReferences = Integer.parseInt(metricsList.get(2));
+
+            newArticle.setNumberOfCitations(numberOfCitations);
+            newArticle.setNumberOfReferences(numberOfReferences);
+
+            newArticlesList.add(newArticle);
+            articleRepository.save(newArticle);
+
+            //TODO: Set Authors, Conference, Journal, Keywords, and Categories
+            //TODO: Handle errors
+        }
+        return newArticlesList;
     }
 
     @Override
