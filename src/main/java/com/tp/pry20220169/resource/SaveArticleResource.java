@@ -20,6 +20,10 @@ public class SaveArticleResource {
     //TODO: Implement Authors: List<Author> / Many to many relation
 
     //TODO: Implement Conference: Conference / Many to one relation (Conference has many articles, articles belong to one conference)
+    @NotNull
+    @NotBlank
+    @Size(max = 100)
+    private String conferenceName;
 
     @NotNull
     private Date publicationDate;
