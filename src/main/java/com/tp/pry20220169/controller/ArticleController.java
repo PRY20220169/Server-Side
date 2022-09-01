@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Tag(name = "Articles", description = "Articles API")
@@ -54,6 +55,12 @@ public class ArticleController {
         Article article = convertToEntity(resource);
         article.setConference(conference);
         return convertToResource(articleService.createArticle(article));
+    }
+
+    //RPA Test Connection Endpoint
+    @PostMapping("/rpa-test")
+    public List<Article> createArticleRPATest(@Valid @RequestBody List<Map<String, String>> resource){
+        return articleService.createArticleFromRPA(resource);
     }
 
     @PutMapping("/{articleId}")
