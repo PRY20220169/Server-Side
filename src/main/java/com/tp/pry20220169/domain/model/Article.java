@@ -49,13 +49,13 @@ public class Article extends AuditModel{
     @JsonIgnore
     private Conference conference;
 
-    @NotNull
     private Date publicationDate;
 
     //TODO: Implement Journal: Journal / Many to one relation (Journal has many articles, articles belong to one journal)
 
     @NotNull
     @NotBlank
+    @Column(length = 500)
     private String description;
 
     @ElementCollection
