@@ -89,4 +89,9 @@ public class ArticleServiceImpl implements ArticleService {
             return new PageImpl<>(articles, pageable, articlesCount);
         }).orElseThrow(() -> new ResourceNotFoundException("Author", "Id", authorId));
     }
+
+    @Override
+    public Page<Article> getAllArticlesByConferenceId(Long conferenceId, Pageable pageable) {
+        return articleRepository.findAllByConferenceId(conferenceId, pageable);
+    }
 }

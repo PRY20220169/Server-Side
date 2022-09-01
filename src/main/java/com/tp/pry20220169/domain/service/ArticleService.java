@@ -15,6 +15,7 @@ public interface ArticleService {
     Article addArticleAuthor(Long articleId, Long authorId);
     Article removeArticleAuthor(Long articleId, Long authorId);
     Page<Article> getAllArticlesByAuthorId(Long authorId, Pageable pageable);
+    Page<Article> getAllArticlesByConferenceId(Long conferenceId, Pageable pageable);
     // TODO: Implement more methods
 
 }
