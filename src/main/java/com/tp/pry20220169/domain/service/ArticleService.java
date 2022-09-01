@@ -19,7 +19,7 @@ public interface ArticleService {
     Article addArticleAuthor(Long articleId, Long authorId);
     Article removeArticleAuthor(Long articleId, Long authorId);
     Page<Article> getAllArticlesByAuthorId(Long authorId, Pageable pageable);
-
+    Page<Article> getAllArticlesByConferenceId(Long conferenceId, Pageable pageable);
     List<Article> createArticleFromRPA(List<Map<String, String>> resource);
     // TODO: Implement more methods
 

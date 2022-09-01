@@ -2,6 +2,8 @@ package com.tp.pry20220169.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -41,7 +43,11 @@ public class Article extends AuditModel{
         return this;
     }
 
-    //TODO: Implement Conference: Conference / Many to one relation (Conference has many articles, articles belong to one conference)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "conference_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Conference conference;
 
     private Date publicationDate;
 
