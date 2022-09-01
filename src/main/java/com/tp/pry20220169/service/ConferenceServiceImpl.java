@@ -4,6 +4,7 @@ import com.tp.pry20220169.domain.model.Conference;
 import com.tp.pry20220169.domain.repository.ConferenceRepository;
 import com.tp.pry20220169.domain.service.ConferenceService;
 import com.tp.pry20220169.exception.ResourceNotFoundException;
+import com.tp.pry20220169.resource.SaveArticleResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +23,16 @@ public class ConferenceServiceImpl implements ConferenceService {
     public Conference getConferenceById(Long conferenceId) {
         return conferenceRepository.findById(conferenceId)
                 .orElseThrow(() -> new ResourceNotFoundException("Conference", "Id", conferenceId));
+    }
+
+    @Override
+    public Conference getConferenceBySaveArticleResource(SaveArticleResource resource) {
+        String conferenceName = resource.getConferenceName();
+        Conference conference = new Conference();
+        conference.setMeetingName(conferenceName);
+        conference.setDate(resource.getPublicationDate());
+        return conferenceRepository.findByMeetingName(conferenceName)
+                .orElse(conferenceRepository.save(conference));
     }
 
     @Override
