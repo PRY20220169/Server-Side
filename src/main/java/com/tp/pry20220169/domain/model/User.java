@@ -1,5 +1,6 @@
 package com.tp.pry20220169.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,4 +22,9 @@ public class User extends AuditModel{
     @NotNull
     @NotBlank
     private String password;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    @JsonIgnore
+    private Account account;
 }
