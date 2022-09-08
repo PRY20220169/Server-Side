@@ -1358,7 +1358,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Article 2\",\r\n    \"conferenceName\": \"Conference 1\",\r\n    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\r\n    \"description\": \"Description of Article 1\",\r\n    \"keywords\": [\"Innovation\", \"Machine Learning\"],\r\n    \"categories\": [\"Science\", \"Technology\"],\r\n    \"numberOfCitation\": 2,\r\n    \"numberOfReferences\": 5\r\n}",
+							"raw": "{\r\n    \"title\": \"Article 2\",\r\n    \"conferenceName\": \"Conference 1\",\r\n    \"journalName\": \"Journal 1\",\r\n    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\r\n    \"description\": \"Description of Article 1\",\r\n    \"keywords\": [\"Innovation\", \"Machine Learning\"],\r\n    \"categories\": [\"Science\", \"Technology\"],\r\n    \"numberOfCitation\": 2,\r\n    \"numberOfReferences\": 5\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2031,6 +2031,89 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "GetAllArticlesByJournalId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/journals/1/articles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"journals",
+								"1",
+								"articles"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GetAllArticlesByJournalId",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/journals/1/articles",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"journals",
+										"1",
+										"articles"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 08 Sep 2022 21:22:45 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [\n        {\n            \"createdAt\": \"2022-09-08T21:22:40.000+00:00\",\n            \"updatedAt\": \"2022-09-08T21:22:40.000+00:00\",\n            \"id\": 1,\n            \"title\": \"Article 2\",\n            \"authors\": [],\n            \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\n            \"description\": \"Description of Article 1\",\n            \"keywords\": [\n                \"Innovation\",\n                \"Machine Learning\"\n            ],\n            \"categories\": [\n                \"Science\",\n                \"Technology\"\n            ],\n            \"numberOfCitations\": 0,\n            \"numberOfReferences\": 5\n        }\n    ],\n    \"pageable\": {\n        \"sort\": {\n            \"empty\": true,\n            \"sorted\": false,\n            \"unsorted\": true\n        },\n        \"offset\": 0,\n        \"pageSize\": 20,\n        \"pageNumber\": 0,\n        \"unpaged\": false,\n        \"paged\": true\n    },\n    \"last\": true,\n    \"totalElements\": 1,\n    \"totalPages\": 1,\n    \"size\": 20,\n    \"number\": 0,\n    \"sort\": {\n        \"empty\": true,\n        \"sorted\": false,\n        \"unsorted\": true\n    },\n    \"first\": true,\n    \"numberOfElements\": 1,\n    \"empty\": false\n}"
+						}
+					]
 				}
 			]
 		},

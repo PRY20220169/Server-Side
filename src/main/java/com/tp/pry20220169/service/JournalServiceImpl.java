@@ -4,6 +4,7 @@ import com.tp.pry20220169.domain.model.Journal;
 import com.tp.pry20220169.domain.repository.JournalRepository;
 import com.tp.pry20220169.domain.service.JournalService;
 import com.tp.pry20220169.exception.ResourceNotFoundException;
+import com.tp.pry20220169.resource.SaveArticleResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +25,15 @@ public class JournalServiceImpl implements JournalService {
     public Journal getJournalById(Long journalId) {
         return journalRepository.findById(journalId)
                 .orElseThrow(() -> new ResourceNotFoundException("Journal", "Id", journalId));
+    }
+
+    @Override
+    public Journal getJournalBySaveArticleResource(SaveArticleResource resource) {
+        String journalName = resource.getJournalName();
+        Journal journal = new Journal();
+        journal.setName(journalName);
+        return journalRepository.findByName(journalName)
+                .orElse(journalRepository.save(journal));
     }
 
     @Override
