@@ -2,8 +2,10 @@ package com.tp.pry20220169.controller;
 
 import com.tp.pry20220169.domain.model.Article;
 import com.tp.pry20220169.domain.model.Conference;
+import com.tp.pry20220169.domain.model.Journal;
 import com.tp.pry20220169.domain.service.ArticleService;
 import com.tp.pry20220169.domain.service.ConferenceService;
+import com.tp.pry20220169.domain.service.JournalService;
 import com.tp.pry20220169.resource.ArticleResource;
 import com.tp.pry20220169.resource.SaveArticleResource;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -33,6 +35,9 @@ public class ArticleController {
     private ConferenceService conferenceService;
 
     @Autowired
+    private JournalService journalService;
+
+    @Autowired
     private ModelMapper mapper;
 
     @GetMapping("")
@@ -52,8 +57,10 @@ public class ArticleController {
     @PostMapping("")
     public ArticleResource createArticle(@Valid @RequestBody SaveArticleResource resource){
         Conference conference = conferenceService.getConferenceBySaveArticleResource(resource);
+        Journal journal = journalService.getJournalBySaveArticleResource(resource);
         Article article = convertToEntity(resource);
         article.setConference(conference);
+        article.setJournal(journal);
         return convertToResource(articleService.createArticle(article));
     }
 

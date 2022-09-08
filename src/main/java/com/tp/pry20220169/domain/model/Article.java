@@ -51,7 +51,11 @@ public class Article extends AuditModel{
 
     private Date publicationDate;
 
-    //TODO: Implement Journal: Journal / Many to one relation (Journal has many articles, articles belong to one journal)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "journal_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Journal journal;
 
     @NotNull
     @NotBlank

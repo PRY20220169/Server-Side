@@ -86,9 +86,9 @@ public class ArticleServiceImpl implements ArticleService {
     public Article updateArticle(Long articleId, Article articleDetails) {
         return articleRepository.findById(articleId).map(article -> {
             article.setTitle(articleDetails.getTitle());
-            //article.setConference
+            article.setConference(articleDetails.getConference());
             article.setPublicationDate(articleDetails.getPublicationDate());
-            //article.setJournal
+            article.setJournal(articleDetails.getJournal());
             article.setDescription(articleDetails.getDescription());
             article.setKeywords(articleDetails.getKeywords());
             article.setCategories(articleDetails.getCategories());
@@ -136,5 +136,10 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Page<Article> getAllArticlesByConferenceId(Long conferenceId, Pageable pageable) {
         return articleRepository.findAllByConferenceId(conferenceId, pageable);
+    }
+
+    @Override
+    public Page<Article> getAllArticlesByJournalId(Long journalId, Pageable pageable) {
+        return articleRepository.findAllByJournalId(journalId, pageable);
     }
 }

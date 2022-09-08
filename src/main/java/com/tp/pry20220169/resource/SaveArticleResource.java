@@ -32,6 +32,11 @@ public class SaveArticleResource {
 
     @NotNull
     @NotBlank
+    @Size(max = 100)
+    private String journalName;
+
+    @NotNull
+    @NotBlank
     private String description;
 
     private List<String> keywords;
