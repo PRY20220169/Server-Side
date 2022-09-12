@@ -31,6 +31,9 @@ public class Article extends AuditModel{
     @JsonIgnore
     private List<Author> authors;
 
+    @ManyToMany(mappedBy = "articles")
+    private List<Collection> collections;
+
     public boolean hasAuthor(Author author) { return (this.getAuthors().contains(author)); }
 
     public Article addAuthor(Author author) {
