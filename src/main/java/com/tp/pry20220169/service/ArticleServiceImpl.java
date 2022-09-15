@@ -13,9 +13,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
@@ -141,5 +138,15 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Page<Article> getAllArticlesByJournalId(Long journalId, Pageable pageable) {
         return articleRepository.findAllByJournalId(journalId, pageable);
+    }
+
+    @Override
+    public Page<Article> getAllArticlesByKeywords(List<String> keywords, Pageable pageable) {
+        return articleRepository.findByKeywordsIn(keywords, pageable);
+    }
+
+    @Override
+    public Page<Article> getAllArticlesByCategories(List<String> categories, Pageable pageable) {
+        return articleRepository.findByCategoriesIn(categories, pageable);
     }
 }

@@ -28,11 +28,11 @@ public class ConferenceServiceImpl implements ConferenceService {
     @Override
     public Conference getConferenceBySaveArticleResource(SaveArticleResource resource) {
         String conferenceName = resource.getConferenceName();
+        if (Boolean.TRUE.equals(conferenceRepository.existsByMeetingName(conferenceName))) return conferenceRepository.findByMeetingName(conferenceName);
         Conference conference = new Conference();
         conference.setMeetingName(conferenceName);
         conference.setDate(resource.getPublicationDate());
-        return conferenceRepository.findByMeetingName(conferenceName)
-                .orElse(conferenceRepository.save(conference));
+        return conferenceRepository.save(conference);
     }
 
     @Override
