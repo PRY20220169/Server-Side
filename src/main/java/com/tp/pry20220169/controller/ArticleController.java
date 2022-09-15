@@ -73,7 +73,11 @@ public class ArticleController {
     @PutMapping("/{articleId}")
     public ArticleResource updateArticle(@PathVariable(name = "articleId") Long articleId,
             @Valid @RequestBody SaveArticleResource resource){
+        Conference conference = conferenceService.getConferenceBySaveArticleResource(resource);
+        Journal journal = journalService.getJournalBySaveArticleResource(resource);
         Article article = convertToEntity(resource);
+        article.setConference(conference);
+        article.setJournal(journal);
         return convertToResource(articleService.updateArticle(articleId, article));
     }
 
