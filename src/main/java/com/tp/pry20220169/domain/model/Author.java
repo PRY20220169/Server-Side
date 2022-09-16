@@ -24,12 +24,8 @@ public class Author extends AuditModel{
     @NotBlank
     private String lastName;
 
-    @NotNull
-    @NotBlank
     private String address;
 
-    @NotNull
-    @NotBlank
     private String email;
 
     @ElementCollection
