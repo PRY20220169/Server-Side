@@ -30,10 +30,10 @@ public class JournalServiceImpl implements JournalService {
     @Override
     public Journal getJournalBySaveArticleResource(SaveArticleResource resource) {
         String journalName = resource.getJournalName();
+        if (journalRepository.existsByName(journalName)) return journalRepository.findByName(journalName);
         Journal journal = new Journal();
         journal.setName(journalName);
-        return journalRepository.findByName(journalName)
-                .orElse(journalRepository.save(journal));
+        return journalRepository.save(journal);
     }
 
     @Override
