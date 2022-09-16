@@ -9,6 +9,9 @@ public interface AuthorService {
     Page<Author> getAllAuthors(Pageable pageable);
     Page<Author> getAllAuthorsByArticleId(Long articleId, Pageable pageable);
     Author getAuthorById(Long authorId);
+    Page<Author> getAuthorsByFirstName(String firstName, Pageable pageable);
+    Page<Author> getAuthorsByLastName(String lastName, Pageable pageable);
+    Page<Author> getAuthorsByFirstNameAndLastName(String firstName, String lastName, Pageable pageable);
     Author createAuthor(Author author);
     Author updateAuthor(Long authorId, Author authorDetails);
     ResponseEntity<?> deleteAuthor(Long authorId);

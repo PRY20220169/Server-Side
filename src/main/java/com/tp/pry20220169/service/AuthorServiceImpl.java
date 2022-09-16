@@ -43,6 +43,21 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
+    public Page<Author> getAuthorsByFirstName(String firstName, Pageable pageable) {
+        return authorRepository.findByFirstName(firstName, pageable);
+    }
+
+    @Override
+    public Page<Author> getAuthorsByLastName(String lastName, Pageable pageable) {
+        return authorRepository.findByLastName(lastName, pageable);
+    }
+
+    @Override
+    public Page<Author> getAuthorsByFirstNameAndLastName(String firstName, String lastName, Pageable pageable) {
+        return authorRepository.findByFirstNameAndLastName(firstName, lastName, pageable);
+    }
+
+    @Override
     public Author createAuthor(Author author) {
         return authorRepository.save(author);
     }
