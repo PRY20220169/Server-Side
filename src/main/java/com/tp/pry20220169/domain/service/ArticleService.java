@@ -23,8 +23,7 @@ public interface ArticleService {
     Page<Article> getAllArticlesByConferenceId(Long conferenceId, Pageable pageable);
     Page<Article> getAllArticlesByJournalId(Long journalId, Pageable pageable);
     List<Article> createArticleFromRPA(List<Map<String, String>> resource);
-    // TODO: Implement more methods
-
+    List<Article> createArticleFromWOS(List<Map<String, String>> resource);
     Page<Article> getAllArticlesByKeywords(List<String> keywords, Pageable pageable);
     Page<Article> getAllArticlesByCategories(List<String> categories, Pageable pageable);
 }
