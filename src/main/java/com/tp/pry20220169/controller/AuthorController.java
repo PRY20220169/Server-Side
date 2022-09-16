@@ -43,6 +43,34 @@ public class AuthorController {
         return convertToResource(authorService.getAuthorById(authorId));
     }
 
+    @GetMapping("/firstName/{firstName}")
+    public Page<AuthorResource> getAuthorByFirstName(@PathVariable(name = "firstName") String firstName, Pageable pageable){
+        Page<Author> authorPage = authorService.getAuthorsByFirstName(firstName, pageable);
+        List<AuthorResource> resources = authorPage.getContent()
+                .stream().map(this::convertToResource)
+                .collect(Collectors.toList());
+        return new PageImpl<>(resources, pageable, resources.size());
+    }
+
+    @GetMapping("/lastName/{lastName}")
+    public Page<AuthorResource> getAuthorByLastName(@PathVariable(name = "lastName") String lastName, Pageable pageable){
+        Page<Author> authorPage = authorService.getAuthorsByLastName(lastName, pageable);
+        List<AuthorResource> resources = authorPage.getContent()
+                .stream().map(this::convertToResource)
+                .collect(Collectors.toList());
+        return new PageImpl<>(resources, pageable, resources.size());
+    }
+
+    @GetMapping("/firstName/{firstName}/lastName/{lastName}")
+    public Page<AuthorResource> getAuthorByLastName(@PathVariable(name = "firstName") String firstName,
+                                                    @PathVariable(name = "lastName") String lastName, Pageable pageable){
+        Page<Author> authorPage = authorService.getAuthorsByFirstNameAndLastName(firstName, lastName, pageable);
+        List<AuthorResource> resources = authorPage.getContent()
+                .stream().map(this::convertToResource)
+                .collect(Collectors.toList());
+        return new PageImpl<>(resources, pageable, resources.size());
+    }
+
     @PostMapping("")
     public AuthorResource createAuthor(@Valid @RequestBody SaveAuthorResource resource){
         Author author = convertToEntity(resource);
