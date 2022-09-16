@@ -209,7 +209,6 @@ public class ArticleServiceImpl implements ArticleService {
     public Article addArticleAuthor(Long articleId, Long authorId) {
         Author author = authorRepository.findById(authorId)
                 .orElseThrow(() -> new ResourceNotFoundException("Author", "Id", authorId));
-        System.out.println(author.getId());
         return articleRepository.findById(articleId).map(article ->
                 articleRepository.save(article.addAuthor(author)))
                 .orElseThrow(() -> new ResourceNotFoundException("Article", "Id", articleId));
@@ -241,5 +240,15 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Page<Article> getAllArticlesByJournalId(Long journalId, Pageable pageable) {
         return articleRepository.findAllByJournalId(journalId, pageable);
+    }
+
+    @Override
+    public Page<Article> getAllArticlesByKeywords(List<String> keywords, Pageable pageable) {
+        return articleRepository.findByKeywordsIn(keywords, pageable);
+    }
+
+    @Override
+    public Page<Article> getAllArticlesByCategories(List<String> categories, Pageable pageable) {
+        return articleRepository.findByCategoriesIn(categories, pageable);
     }
 }

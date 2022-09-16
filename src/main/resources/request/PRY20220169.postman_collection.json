@@ -1,11 +1,154 @@
 {
 	"info": {
-		"_postman_id": "76990687-0285-4f57-a731-d9e25adfdf95",
+		"_postman_id": "fa0b5cff-4c49-4711-b4eb-5f19bd86350f",
 		"name": "PRY20220169",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "11042444"
 	},
 	"item": [
+		{
+			"name": "ArticlesSearch",
+			"item": [
+				{
+					"name": "SearchByKeywords",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"keywords\": [\"Machine Learning\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/articles/search/keywords",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"articles",
+								"search",
+								"keywords"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SearchByCategories",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categories\": [\"Science\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/articles/search/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"articles",
+								"search",
+								"categories"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "SearchByCategories",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"categories\": [\"Science\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/articles/search/categories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"articles",
+										"search",
+										"categories"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Sep 2022 23:44:38 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [\n        {\n            \"createdAt\": \"2022-09-15T23:43:29.000+00:00\",\n            \"updatedAt\": \"2022-09-15T23:43:29.000+00:00\",\n            \"id\": 1,\n            \"title\": \"Article 1\",\n            \"authors\": [],\n            \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\n            \"description\": \"Description of Article 1\",\n            \"keywords\": [\n                \"RPA\",\n                \"Spring Boot\"\n            ],\n            \"categories\": [\n                \"Science\",\n                \"Technology\"\n            ],\n            \"numberOfCitations\": 0,\n            \"numberOfReferences\": 5\n        },\n        {\n            \"createdAt\": \"2022-09-15T23:43:36.000+00:00\",\n            \"updatedAt\": \"2022-09-15T23:43:36.000+00:00\",\n            \"id\": 2,\n            \"title\": \"Article 2\",\n            \"authors\": [],\n            \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\n            \"description\": \"Description of Article 1\",\n            \"keywords\": [\n                \"RPA\",\n                \"Spring Boot\"\n            ],\n            \"categories\": [\n                \"Science\"\n            ],\n            \"numberOfCitations\": 0,\n            \"numberOfReferences\": 5\n        }\n    ],\n    \"pageable\": {\n        \"sort\": {\n            \"empty\": true,\n            \"sorted\": false,\n            \"unsorted\": true\n        },\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 20,\n        \"unpaged\": false,\n        \"paged\": true\n    },\n    \"last\": true,\n    \"totalPages\": 1,\n    \"totalElements\": 2,\n    \"size\": 20,\n    \"number\": 0,\n    \"sort\": {\n        \"empty\": true,\n        \"sorted\": false,\n        \"unsorted\": true\n    },\n    \"first\": true,\n    \"numberOfElements\": 2,\n    \"empty\": false\n}"
+						}
+					]
+				}
+			]
+		},
 		{
 			"name": "Authors",
 			"item": [
@@ -1358,7 +1501,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Article 2\",\r\n    \"conferenceName\": \"Conference 1\",\r\n    \"journalName\": \"Journal 1\",\r\n    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\r\n    \"description\": \"Description of Article 1\",\r\n    \"keywords\": [\"Innovation\", \"Machine Learning\"],\r\n    \"categories\": [\"Science\", \"Technology\"],\r\n    \"numberOfCitation\": 2,\r\n    \"numberOfReferences\": 5\r\n}",
+							"raw": "{\r\n    \"title\": \"Article 3\",\r\n    \"conferenceName\": \"Conference 1\",\r\n    \"journalName\": \"Journal 1\",\r\n    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\r\n    \"description\": \"Description of Article 1\",\r\n    \"keywords\": [\"RPA\", \"Spring Boot\"],\r\n    \"categories\": [\"Math\"],\r\n    \"numberOfCitation\": 2,\r\n    \"numberOfReferences\": 5\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1455,7 +1598,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Article 69\",\r\n    \"conferenceName\": \"Conference 1\",\r\n    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\r\n    \"description\": \"Description of Article 1\",\r\n    \"keywords\": [\"Innovation\", \"Machine Learning\"],\r\n    \"categories\": [\"Science\", \"Technology\"],\r\n    \"numberOfCitation\": 2,\r\n    \"numberOfReferences\": 5\r\n}",
+							"raw": "{\r\n  \"title\": \"Article 69\",\r\n  \"conferenceName\": \"Conference 1\",\r\n  \"publicationDate\": \"2022-09-15T23:04:18.444Z\",\r\n  \"journalName\": \"Journal 1\",\r\n  \"description\": \"Description of Article 1\",\r\n  \"keywords\": [\r\n    \"Innovation\",\r\n    \"Machine Learning\"\r\n  ],\r\n  \"categories\": [\r\n    \"Science\",\r\n    \"Technology\"\r\n  ],\r\n  \"numberOfCitations\": 2,\r\n  \"numberOfReferences\": 5\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2987,12 +3130,12 @@
 					},
 					"response": [
 						{
-							"name": "GetAllArticles",
+							"name": "GetAllCollections",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/api/articles",
+									"raw": "http://localhost:8080/api/collections",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -3000,7 +3143,7 @@
 									"port": "8080",
 									"path": [
 										"api",
-										"articles"
+										"collections"
 									]
 								}
 							},
@@ -3030,7 +3173,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 17 Aug 2022 22:08:06 GMT"
+									"value": "Thu, 15 Sep 2022 22:07:45 GMT"
 								},
 								{
 									"key": "Keep-Alive",
@@ -3042,7 +3185,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"content\": [\n        {\n            \"createdAt\": \"2022-08-17T22:05:20.000+00:00\",\n            \"updatedAt\": \"2022-08-17T22:07:23.000+00:00\",\n            \"id\": 1,\n            \"title\": \"Article 69\",\n            \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\n            \"description\": \"Description of Article 1\",\n            \"keywords\": [\n                \"Innovation\",\n                \"Machine Learning\"\n            ],\n            \"categories\": [\n                \"Science\",\n                \"Technology\"\n            ],\n            \"numberOfCitations\": 0,\n            \"numberOfReferences\": 5\n        }\n    ],\n    \"pageable\": {\n        \"sort\": {\n            \"empty\": true,\n            \"sorted\": false,\n            \"unsorted\": true\n        },\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 20,\n        \"paged\": true,\n        \"unpaged\": false\n    },\n    \"last\": true,\n    \"totalPages\": 1,\n    \"totalElements\": 1,\n    \"size\": 20,\n    \"number\": 0,\n    \"sort\": {\n        \"empty\": true,\n        \"sorted\": false,\n        \"unsorted\": true\n    },\n    \"first\": true,\n    \"numberOfElements\": 1,\n    \"empty\": false\n}"
+							"body": "{\n    \"content\": [\n        {\n            \"id\": 1,\n            \"name\": \"Collection 1\",\n            \"articles\": [\n                {\n                    \"createdAt\": \"2022-09-15T21:23:23.000+00:00\",\n                    \"updatedAt\": \"2022-09-15T21:23:23.000+00:00\",\n                    \"id\": 1,\n                    \"title\": \"Article 2\",\n                    \"authors\": [],\n                    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\n                    \"description\": \"Description of Article 1\",\n                    \"keywords\": [\n                        \"Innovation\",\n                        \"Machine Learning\"\n                    ],\n                    \"categories\": [\n                        \"Science\",\n                        \"Technology\"\n                    ],\n                    \"numberOfCitations\": 0,\n                    \"numberOfReferences\": 5\n                }\n            ]\n        }\n    ],\n    \"pageable\": {\n        \"sort\": {\n            \"empty\": true,\n            \"sorted\": false,\n            \"unsorted\": true\n        },\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 20,\n        \"unpaged\": false,\n        \"paged\": true\n    },\n    \"last\": true,\n    \"totalPages\": 1,\n    \"totalElements\": 1,\n    \"size\": 20,\n    \"number\": 0,\n    \"sort\": {\n        \"empty\": true,\n        \"sorted\": false,\n        \"unsorted\": true\n    },\n    \"first\": true,\n    \"numberOfElements\": 1,\n    \"empty\": false\n}"
 						}
 					]
 				},
@@ -3067,12 +3210,12 @@
 					},
 					"response": [
 						{
-							"name": "GetArticleById",
+							"name": "GetCollectionById",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/api/articles/1",
+									"raw": "http://localhost:8080/api/collections/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -3080,7 +3223,7 @@
 									"port": "8080",
 									"path": [
 										"api",
-										"articles",
+										"collections",
 										"1"
 									]
 								}
@@ -3111,7 +3254,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 17 Aug 2022 22:11:51 GMT"
+									"value": "Thu, 15 Sep 2022 21:24:14 GMT"
 								},
 								{
 									"key": "Keep-Alive",
@@ -3123,7 +3266,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"createdAt\": \"2022-08-17T22:05:20.000+00:00\",\n    \"updatedAt\": \"2022-08-17T22:07:23.000+00:00\",\n    \"id\": 1,\n    \"title\": \"Article 69\",\n    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\n    \"description\": \"Description of Article 1\",\n    \"keywords\": [\n        \"Innovation\",\n        \"Machine Learning\"\n    ],\n    \"categories\": [\n        \"Science\",\n        \"Technology\"\n    ],\n    \"numberOfCitations\": 0,\n    \"numberOfReferences\": 5\n}"
+							"body": "{\n    \"id\": 1,\n    \"name\": \"Collection 1\",\n    \"articles\": [\n        {\n            \"createdAt\": \"2022-09-15T21:23:23.000+00:00\",\n            \"updatedAt\": \"2022-09-15T21:23:23.000+00:00\",\n            \"id\": 1,\n            \"title\": \"Article 2\",\n            \"authors\": [],\n            \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\n            \"description\": \"Description of Article 1\",\n            \"keywords\": [\n                \"Innovation\",\n                \"Machine Learning\"\n            ],\n            \"categories\": [\n                \"Science\",\n                \"Technology\"\n            ],\n            \"numberOfCitations\": 0,\n            \"numberOfReferences\": 5\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -3156,13 +3299,13 @@
 					},
 					"response": [
 						{
-							"name": "CreateArticle",
+							"name": "CreateCollection",
 							"originalRequest": {
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"Article 1\",\r\n    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\r\n    \"description\": \"Description of Article 1\",\r\n    \"keywords\": [\"Innovation\", \"Machine Learning\"],\r\n    \"categories\": [\"Science\", \"Technology\"],\r\n    \"numberOfCitation\": 2,\r\n    \"numberOfReferences\": 5\r\n}",
+									"raw": "{\r\n    \"name\": \"Collection 1\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3170,7 +3313,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/articles",
+									"raw": "http://localhost:8080/api/collections",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -3178,7 +3321,7 @@
 									"port": "8080",
 									"path": [
 										"api",
-										"articles"
+										"collections"
 									]
 								}
 							},
@@ -3208,7 +3351,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 17 Aug 2022 22:07:57 GMT"
+									"value": "Thu, 15 Sep 2022 21:23:31 GMT"
 								},
 								{
 									"key": "Keep-Alive",
@@ -3220,7 +3363,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"createdAt\": \"2022-08-17T22:07:57.202+00:00\",\n    \"updatedAt\": \"2022-08-17T22:07:57.202+00:00\",\n    \"id\": 2,\n    \"title\": \"Article 2\",\n    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\n    \"description\": \"Description of Article 1\",\n    \"keywords\": [\n        \"Innovation\",\n        \"Machine Learning\"\n    ],\n    \"categories\": [\n        \"Science\",\n        \"Technology\"\n    ],\n    \"numberOfCitations\": 0,\n    \"numberOfReferences\": 5\n}"
+							"body": "{\n    \"id\": 1,\n    \"name\": \"Collection 1\",\n    \"articles\": []\n}"
 						}
 					]
 				},
@@ -3231,7 +3374,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Collection 2 Updated\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Collection 2 Updated\",\r\n    \"articles\": []\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3252,76 +3395,7 @@
 							]
 						}
 					},
-					"response": [
-						{
-							"name": "UpdateArticle",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"Article 69\",\r\n    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\r\n    \"description\": \"Description of Article 1\",\r\n    \"keywords\": [\"Innovation\", \"Machine Learning\"],\r\n    \"categories\": [\"Science\", \"Technology\"],\r\n    \"numberOfCitation\": 2,\r\n    \"numberOfReferences\": 5\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/api/articles/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"api",
-										"articles",
-										"1"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Vary",
-									"value": "Origin"
-								},
-								{
-									"key": "Vary",
-									"value": "Access-Control-Request-Method"
-								},
-								{
-									"key": "Vary",
-									"value": "Access-Control-Request-Headers"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked"
-								},
-								{
-									"key": "Date",
-									"value": "Wed, 17 Aug 2022 22:07:23 GMT"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=60"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"createdAt\": \"2022-08-17T22:05:20.000+00:00\",\n    \"updatedAt\": \"2022-08-17T22:07:23.486+00:00\",\n    \"id\": 1,\n    \"title\": \"Article 69\",\n    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\n    \"description\": \"Description of Article 1\",\n    \"keywords\": [\n        \"Innovation\",\n        \"Machine Learning\"\n    ],\n    \"categories\": [\n        \"Science\",\n        \"Technology\"\n    ],\n    \"numberOfCitations\": 0,\n    \"numberOfReferences\": 5\n}"
-						}
-					]
+					"response": []
 				},
 				{
 					"name": "DeleteCollection",
@@ -3370,67 +3444,7 @@
 							]
 						}
 					},
-					"response": [
-						{
-							"name": "GetArticleById",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8080/api/articles/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"api",
-										"articles",
-										"1"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Vary",
-									"value": "Origin"
-								},
-								{
-									"key": "Vary",
-									"value": "Access-Control-Request-Method"
-								},
-								{
-									"key": "Vary",
-									"value": "Access-Control-Request-Headers"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked"
-								},
-								{
-									"key": "Date",
-									"value": "Wed, 17 Aug 2022 22:11:51 GMT"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=60"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"createdAt\": \"2022-08-17T22:05:20.000+00:00\",\n    \"updatedAt\": \"2022-08-17T22:07:23.000+00:00\",\n    \"id\": 1,\n    \"title\": \"Article 69\",\n    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\n    \"description\": \"Description of Article 1\",\n    \"keywords\": [\n        \"Innovation\",\n        \"Machine Learning\"\n    ],\n    \"categories\": [\n        \"Science\",\n        \"Technology\"\n    ],\n    \"numberOfCitations\": 0,\n    \"numberOfReferences\": 5\n}"
-						}
-					]
+					"response": []
 				},
 				{
 					"name": "RemoveArticleByIdAndCollectionId",
@@ -3453,67 +3467,7 @@
 							]
 						}
 					},
-					"response": [
-						{
-							"name": "GetArticleById",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8080/api/articles/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"api",
-										"articles",
-										"1"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Vary",
-									"value": "Origin"
-								},
-								{
-									"key": "Vary",
-									"value": "Access-Control-Request-Method"
-								},
-								{
-									"key": "Vary",
-									"value": "Access-Control-Request-Headers"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked"
-								},
-								{
-									"key": "Date",
-									"value": "Wed, 17 Aug 2022 22:11:51 GMT"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=60"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"createdAt\": \"2022-08-17T22:05:20.000+00:00\",\n    \"updatedAt\": \"2022-08-17T22:07:23.000+00:00\",\n    \"id\": 1,\n    \"title\": \"Article 69\",\n    \"publicationDate\": \"2021-08-30T06:00:00.000+00:00\",\n    \"description\": \"Description of Article 1\",\n    \"keywords\": [\n        \"Innovation\",\n        \"Machine Learning\"\n    ],\n    \"categories\": [\n        \"Science\",\n        \"Technology\"\n    ],\n    \"numberOfCitations\": 0,\n    \"numberOfReferences\": 5\n}"
-						}
-					]
+					"response": []
 				}
 			]
 		}
