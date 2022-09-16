@@ -70,6 +70,11 @@ public class ArticleController {
         return articleService.createArticleFromRPA(resource);
     }
 
+    @PostMapping("/wos-rpa")
+    public List<Article> createArticleWOS(@Valid @RequestBody List<Map<String, String>> resource){
+        return articleService.createArticleFromWOS(resource);
+    }
+
     @PutMapping("/{articleId}")
     public ArticleResource updateArticle(@PathVariable(name = "articleId") Long articleId,
             @Valid @RequestBody SaveArticleResource resource){

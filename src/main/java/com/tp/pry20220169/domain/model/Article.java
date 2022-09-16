@@ -8,6 +8,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -46,8 +47,8 @@ public class Article extends AuditModel{
         return this;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "conference_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "conference_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Conference conference;
@@ -62,7 +63,7 @@ public class Article extends AuditModel{
 
     @NotNull
     @NotBlank
-    @Column(length = 500)
+    @Column(length = 2000)
     private String description;
 
     @ElementCollection
