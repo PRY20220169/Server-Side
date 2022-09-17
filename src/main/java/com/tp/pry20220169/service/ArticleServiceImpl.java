@@ -2,8 +2,11 @@ package com.tp.pry20220169.service;
 
 import com.tp.pry20220169.domain.model.Article;
 import com.tp.pry20220169.domain.model.Author;
+import com.tp.pry20220169.domain.model.Journal;
+import com.tp.pry20220169.domain.model.Metric;
 import com.tp.pry20220169.domain.repository.ArticleRepository;
 import com.tp.pry20220169.domain.repository.AuthorRepository;
+import com.tp.pry20220169.domain.repository.JournalRepository;
 import com.tp.pry20220169.domain.service.ArticleService;
 import com.tp.pry20220169.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +16,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -22,6 +29,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Autowired
     private AuthorRepository authorRepository;
+
+    @Autowired
+    private JournalRepository journalRepository;
 
     @Override
     public Page<Article> getAllArticles(Pageable pageable) {
@@ -45,35 +55,127 @@ public class ArticleServiceImpl implements ArticleService {
 
         for (Map<String, String> articleParams : articleParamsList) {
             Article newArticle = new Article();
-            System.out.println(articleParams);
             // Set Article Title
             newArticle.setTitle(articleParams.get("Article_Title"));
-
-            // Set Article Date
-//            String dateInString = articleParams.get("date"); //Format: Mar 2013
-//            dateInString = dateInString.replaceAll("[^0-9a-zA-Z:,]+", "");
-//
-//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM yyyy", Locale.ENGLISH);
-//            LocalDate localDate = LocalDate.parse(dateInString, formatter);
-//            Date dateTime = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-//            newArticle.setPublicationDate(dateTime);
 
             // Set Article Description
             newArticle.setDescription(articleParams.get("summary"));
 
-            // Set Article Metrics
-            String metricsString = articleParams.get("metrics").replaceAll("\\n", ",");
-            List<String> metricsList = Arrays.asList(metricsString.split("\\s*,\\s*"));
-            int numberOfCitations = Integer.parseInt(metricsList.get(0));
-            int numberOfReferences = Integer.parseInt(metricsList.get(2));
-
-            newArticle.setNumberOfCitations(numberOfCitations);
-            newArticle.setNumberOfReferences(numberOfReferences);
-
             newArticlesList.add(newArticle);
             articleRepository.save(newArticle);
+        }
+        return newArticlesList;
+    }
 
-            //TODO: Set Authors, Conference, Journal, Keywords, and Categories
+    @Override
+    public List<Article> createArticleFromWOS(List<Map<String, String>> articleParamsList) {
+        List<Article> newArticlesList = new ArrayList<>();
+
+        for (Map<String, String> articleParams : articleParamsList) {
+            Article newArticle = new Article();
+
+            // Set Article Title
+            newArticle.setTitle(articleParams.get("article_title"));
+
+            // Set Article Date
+            String dateInString = articleParams.get("article_date"); //Format: 2008-08-01
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            try {
+                Date date = formatter.parse(dateInString);
+                newArticle.setPublicationDate(date);
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+            // Set Article Description
+            newArticle.setDescription(articleParams.get("article_description"));
+
+            // Set Article Number of Citations
+            String nocString = articleParams.get("article_noc").replaceAll("\\s+","");
+            newArticle.setNumberOfCitations(Integer.parseInt(nocString));
+
+            // Set Article Number of References
+            String norString = articleParams.get("article_nor").replaceAll("\\s+","");
+            newArticle.setNumberOfReferences(Integer.parseInt(norString));
+
+            // Set Journal Name
+            //TODO: Get Journal by name, if Journal does not exist, create an instance and two metrics (Journal Impact Factor and Journal Citation Indicator)
+
+            // If Journal does not exist
+            Journal journal = new Journal();
+            journal.setName(articleParams.get("journal_name"));
+
+            // Set Journal metrics
+            List<Metric> metrics = new ArrayList<>();
+
+            // if Impact Factor exists
+            if (!Objects.equals(articleParams.get("journal_if"), "")) {
+                Metric jif = new Metric();
+                jif.setBibliometric("Journal Impact Factor");
+                float journalIfValue;
+                try {
+                    journalIfValue = Float.parseFloat(articleParams.get("journal_if"));
+                } catch (Exception e) {
+                    journalIfValue = 0;
+                }
+                jif.setScore(Float.toString(journalIfValue));
+                jif.setYear(Calendar.getInstance().get(Calendar.YEAR));
+                jif.setSource(articleParams.get("source"));
+                metrics.add(jif);
+            }
+
+            // if Citation Indicator exists
+            if (!Objects.equals(articleParams.get("journal_ci"), "")) {
+                Metric jci = new Metric();
+                jci.setBibliometric("Journal Citation Indicator");
+                jci.setScore(articleParams.get("journal_ci"));
+                jci.setYear(Calendar.getInstance().get(Calendar.YEAR));
+                jci.setSource(articleParams.get("source"));
+                metrics.add(jci);
+            }
+
+            journal.setMetrics(metrics);
+            journalRepository.save(journal);
+            newArticle.setJournal(journal);
+
+            // Set Keywords
+            String keywordsString = articleParams.get("keywords");
+            keywordsString = keywordsString.replace("Author Keywords","");
+            List<String> keywords = Arrays.asList(keywordsString.split(" "));
+            newArticle.setKeywords(keywords);
+
+            // Set Categories
+            String categoriesString = articleParams.get("categories");
+            categoriesString = categoriesString.replace("Research Areas", "");
+            List<String> categories = Arrays.asList(categoriesString.split(" "));
+            newArticle.setCategories(categories);
+
+            // Set Authors
+            String authorsString = articleParams.get("authors_list");
+            List<String> authors = new ArrayList<>();
+            Pattern pattern = Pattern.compile("\\((.*?)\\)");
+            Matcher matcher = pattern.matcher(authorsString);
+            while (matcher.find()) {
+                authors.add(matcher.group(1));
+            }
+
+            List<Author> authorsList = new ArrayList<>();
+            for (String authorString : authors) {
+                if (authorString.length() == 0) {
+                    continue;
+                }
+                List<String> authorInfo = Arrays.asList(authorString.split(","));
+                // TODO: Get Author by name, if author does not exist, create an instance
+
+                Author author = new Author();
+                author.setLastName(authorInfo.get(0));
+                author.setFirstName(authorInfo.get(1));
+                authorRepository.save(author);
+                Author newAuthor = authorRepository.findTopByOrderByIdDesc();
+                authorsList.add(newAuthor);
+            }
+            newArticle.setAuthors(authorsList);
+            newArticlesList.add(newArticle);
+            articleRepository.save(newArticle);
             //TODO: Handle errors
         }
         return newArticlesList;
