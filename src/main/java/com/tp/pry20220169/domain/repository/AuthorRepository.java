@@ -6,7 +6,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AuthorRepository extends JpaRepository<Author, Long> {
+
     Page<Author> findByLastName(String lastName, Pageable pageable);
     Page<Author> findByFirstName(String firstName, Pageable pageable);
     Page<Author> findByFirstNameAndLastName(String firstName, String lastName, Pageable pageable);
+
+    Author findTopByOrderByIdDesc();
+
 }
