@@ -75,6 +75,11 @@ public class ArticleController {
         return articleService.createArticleFromWOS(resource);
     }
 
+    @PostMapping("/ieee-rpa")
+    public List<Article> createArticleIEEE(@Valid @RequestBody List<Map<String, String>> resource){
+        return articleService.createArticleFromIEEE(resource);
+    }
+
     @PutMapping("/{articleId}")
     public ArticleResource updateArticle(@PathVariable(name = "articleId") Long articleId,
             @Valid @RequestBody SaveArticleResource resource){
