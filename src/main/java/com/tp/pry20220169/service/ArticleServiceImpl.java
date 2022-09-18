@@ -96,45 +96,50 @@ public class ArticleServiceImpl implements ArticleService {
             String norString = articleParams.get("article_nor").replaceAll("\\s+","");
             newArticle.setNumberOfReferences(Integer.parseInt(norString));
 
-            // Set Journal Name
-            //TODO: Get Journal by name, if Journal does not exist, create an instance and two metrics (Journal Impact Factor and Journal Citation Indicator)
+            // If Journal exists
+            String journalName = articleParams.get("journal_name");
+            if (journalRepository.existsByName(journalName)) {
+                Journal journal = journalRepository.findByName(journalName);
+                newArticle.setJournal(journal);
+            }
+            else {
+                // If Journal does not exist
+                Journal journal = new Journal();
+                journal.setName(journalName);
 
-            // If Journal does not exist
-            Journal journal = new Journal();
-            journal.setName(articleParams.get("journal_name"));
+                // Set Journal metrics
+                List<Metric> metrics = new ArrayList<>();
 
-            // Set Journal metrics
-            List<Metric> metrics = new ArrayList<>();
-
-            // if Impact Factor exists
-            if (!Objects.equals(articleParams.get("journal_if"), "")) {
-                Metric jif = new Metric();
-                jif.setBibliometric("Journal Impact Factor");
-                float journalIfValue;
-                try {
-                    journalIfValue = Float.parseFloat(articleParams.get("journal_if"));
-                } catch (Exception e) {
-                    journalIfValue = 0;
+                // if Impact Factor exists
+                if (!Objects.equals(articleParams.get("journal_if"), "")) {
+                    Metric jif = new Metric();
+                    jif.setBibliometric("Journal Impact Factor");
+                    float journalIfValue;
+                    try {
+                        journalIfValue = Float.parseFloat(articleParams.get("journal_if"));
+                    } catch (Exception e) {
+                        journalIfValue = 0;
+                    }
+                    jif.setScore(Float.toString(journalIfValue));
+                    jif.setYear(Calendar.getInstance().get(Calendar.YEAR));
+                    jif.setSource(articleParams.get("source"));
+                    metrics.add(jif);
                 }
-                jif.setScore(Float.toString(journalIfValue));
-                jif.setYear(Calendar.getInstance().get(Calendar.YEAR));
-                jif.setSource(articleParams.get("source"));
-                metrics.add(jif);
-            }
 
-            // if Citation Indicator exists
-            if (!Objects.equals(articleParams.get("journal_ci"), "")) {
-                Metric jci = new Metric();
-                jci.setBibliometric("Journal Citation Indicator");
-                jci.setScore(articleParams.get("journal_ci"));
-                jci.setYear(Calendar.getInstance().get(Calendar.YEAR));
-                jci.setSource(articleParams.get("source"));
-                metrics.add(jci);
-            }
+                // if Citation Indicator exists
+                if (!Objects.equals(articleParams.get("journal_ci"), "")) {
+                    Metric jci = new Metric();
+                    jci.setBibliometric("Journal Citation Indicator");
+                    jci.setScore(articleParams.get("journal_ci"));
+                    jci.setYear(Calendar.getInstance().get(Calendar.YEAR));
+                    jci.setSource(articleParams.get("source"));
+                    metrics.add(jci);
+                }
 
-            journal.setMetrics(metrics);
-            journalRepository.save(journal);
-            newArticle.setJournal(journal);
+                journal.setMetrics(metrics);
+                journalRepository.save(journal);
+                newArticle.setJournal(journal);
+            }
 
             // Set Keywords
             String keywordsString = articleParams.get("keywords");
@@ -163,14 +168,23 @@ public class ArticleServiceImpl implements ArticleService {
                     continue;
                 }
                 List<String> authorInfo = Arrays.asList(authorString.split(","));
-                // TODO: Get Author by name, if author does not exist, create an instance
-
-                Author author = new Author();
-                author.setLastName(authorInfo.get(0));
-                author.setFirstName(authorInfo.get(1));
-                authorRepository.save(author);
-                Author newAuthor = authorRepository.findTopByOrderByIdDesc();
-                authorsList.add(newAuthor);
+                String firstPart = authorInfo.get(0);
+                String secondPart = authorInfo.get(1).trim();
+                String firstName = Arrays.asList(firstPart.split(" ")).get(0);
+                String lastName = Arrays.asList(secondPart.split(" ")).get(0);
+                List<Author> authorResults = authorRepository.findByFirstNameAndLastName(firstName, lastName);
+                if (authorResults.isEmpty()) {
+                    // Create a new Author
+                    Author author = new Author();
+                    author.setLastName(lastName);
+                    author.setFirstName(firstName);
+                    authorRepository.save(author);
+                    Author newAuthor = authorRepository.findTopByOrderByIdDesc();
+                    authorsList.add(newAuthor);
+                }
+                else {
+                    authorsList.add(authorResults.get(0));
+                }
             }
             newArticle.setAuthors(authorsList);
             newArticlesList.add(newArticle);
@@ -282,14 +296,19 @@ public class ArticleServiceImpl implements ArticleService {
 
                 String firstName = authorInfo.get(0);
                 String lastName = authorInfo.get(authorInfo.size() - 1);
-                // TODO: Get Author by name, if author does not exist, create an instance
-
-                Author author = new Author();
-                author.setLastName(lastName);
-                author.setFirstName(firstName);
-                authorRepository.save(author);
-                Author newAuthor = authorRepository.findTopByOrderByIdDesc();
-                authorsList.add(newAuthor);
+                List<Author> authorResults = authorRepository.findByFirstNameAndLastName(firstName, lastName);
+                if (authorResults.isEmpty()) {
+                    // Create a new Author
+                    Author author = new Author();
+                    author.setLastName(lastName);
+                    author.setFirstName(firstName);
+                    authorRepository.save(author);
+                    Author newAuthor = authorRepository.findTopByOrderByIdDesc();
+                    authorsList.add(newAuthor);
+                }
+                else {
+                    authorsList.add(authorResults.get(0));
+                }
             }
             newArticle.setAuthors(authorsList);
             newArticlesList.add(newArticle);
