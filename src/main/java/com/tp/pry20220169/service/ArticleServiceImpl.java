@@ -16,7 +16,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -83,7 +82,7 @@ public class ArticleServiceImpl implements ArticleService {
             try {
                 Date date = formatter.parse(dateInString);
                 newArticle.setPublicationDate(date);
-            } catch (ParseException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
             // Set Article Description
@@ -169,6 +168,125 @@ public class ArticleServiceImpl implements ArticleService {
                 Author author = new Author();
                 author.setLastName(authorInfo.get(0));
                 author.setFirstName(authorInfo.get(1));
+                authorRepository.save(author);
+                Author newAuthor = authorRepository.findTopByOrderByIdDesc();
+                authorsList.add(newAuthor);
+            }
+            newArticle.setAuthors(authorsList);
+            newArticlesList.add(newArticle);
+            articleRepository.save(newArticle);
+            //TODO: Handle errors
+        }
+        return newArticlesList;
+    }
+    @Override
+    public List<Article> createArticleFromIEEE(List<Map<String, String>> articleParamsList) {
+        List<Article> newArticlesList = new ArrayList<>();
+
+        for (Map<String, String> articleParams : articleParamsList) {
+            Article newArticle = new Article();
+
+            // Set Article Title
+            newArticle.setTitle(articleParams.get("article_title"));
+
+            // Set Article Date
+            String dateInString = articleParams.get("article_date"); //Date of Publication: 23 December 2020
+            dateInString = dateInString.replace("Date of Publication: ",""); // Remove Unused Chars from string
+            SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy ", Locale.ENGLISH);
+            try {
+                Date date = formatter.parse(dateInString);
+                newArticle.setPublicationDate(date);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            // Set Article Description
+            newArticle.setDescription(articleParams.get("article_description"));
+
+            // Set Article Number of Citations
+            String nocString = articleParams.get("article_noc");
+            Pattern p = Pattern.compile("\\d+");
+            Matcher m = p.matcher(nocString);
+            // Find the first one, which is the number of citations
+            if (m.find()) {
+                newArticle.setNumberOfCitations(Integer.parseInt(m.group()));
+            }
+
+            // IEEE Explore does not provide Number of References
+
+            // If Journal exists
+            String journalName = articleParams.get("journal_name");
+            if (journalRepository.existsByName(journalName)) {
+                Journal journal = journalRepository.findByName(journalName);
+                newArticle.setJournal(journal);
+            }
+            else {
+                Journal journal = new Journal();
+                journal.setName(articleParams.get("journal_name"));
+
+                // Set Journal metrics
+                List<Metric> metrics = new ArrayList<>();
+
+                // if Impact Factor exists
+                if (!Objects.equals(articleParams.get("journal_if"), "")) {
+                    Metric jif = new Metric();
+                    jif.setBibliometric("Journal Impact Factor");
+                    float journalIfValue;
+                    try {
+                        journalIfValue = Float.parseFloat(articleParams.get("journal_if"));
+                    } catch (Exception e) {
+                        journalIfValue = 0;
+                    }
+                    jif.setScore(Float.toString(journalIfValue));
+                    jif.setYear(Calendar.getInstance().get(Calendar.YEAR));
+                    jif.setSource(articleParams.get("source"));
+                    metrics.add(jif);
+                }
+
+                // if Eigenfactor exists
+                if (!Objects.equals(articleParams.get("journal_eigenfactor"), "")) {
+                    Metric eigenfactor = new Metric();
+                    eigenfactor.setBibliometric("Journal Eigenfactor");
+                    eigenfactor.setScore(articleParams.get("journal_eigenfactor"));
+                    eigenfactor.setYear(Calendar.getInstance().get(Calendar.YEAR));
+                    eigenfactor.setSource(articleParams.get("source"));
+                    metrics.add(eigenfactor);
+                }
+
+                journal.setMetrics(metrics);
+                journalRepository.save(journal);
+                newArticle.setJournal(journal);
+            }
+
+            // Set Keywords
+            String keywordsString = articleParams.get("keywords");
+            keywordsString = keywordsString.replace("IEEE Keywords","");
+            List<String> keywords = Arrays.asList(keywordsString.split(" , "));
+            for (int i = 0; i < keywords.size(); i++) {
+                keywords.set(i, keywords.get(i).trim());
+            }
+            newArticle.setKeywords(keywords);
+
+            // Set Categories: IEEE only provides keywords, which will be used as categories
+            newArticle.setCategories(keywords);
+
+            // Set Authors
+            String authorsString = articleParams.get("authors_list");
+            List<String> authors = Arrays.asList(authorsString.split("; "));
+
+            List<Author> authorsList = new ArrayList<>();
+            for (String authorString : authors) {
+                if (authorString.length() == 0) {
+                    continue;
+                }
+                List<String> authorInfo = Arrays.asList(authorString.split(" "));
+
+                String firstName = authorInfo.get(0);
+                String lastName = authorInfo.get(authorInfo.size() - 1);
+                // TODO: Get Author by name, if author does not exist, create an instance
+
+                Author author = new Author();
+                author.setLastName(lastName);
+                author.setFirstName(firstName);
                 authorRepository.save(author);
                 Author newAuthor = authorRepository.findTopByOrderByIdDesc();
                 authorsList.add(newAuthor);
