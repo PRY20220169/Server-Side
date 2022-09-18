@@ -24,6 +24,7 @@ public interface ArticleService {
     Page<Article> getAllArticlesByJournalId(Long journalId, Pageable pageable);
     List<Article> createArticleFromRPA(List<Map<String, String>> resource);
     List<Article> createArticleFromWOS(List<Map<String, String>> resource);
+    List<Article> createArticleFromIEEE(List<Map<String, String>> resource);
     Page<Article> getAllArticlesByKeywords(List<String> keywords, Pageable pageable);
     Page<Article> getAllArticlesByCategories(List<String> categories, Pageable pageable);
 }
