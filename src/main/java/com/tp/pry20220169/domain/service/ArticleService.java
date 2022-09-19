@@ -5,8 +5,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
-
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +23,7 @@ public interface ArticleService {
     List<Article> createArticleFromRPA(List<Map<String, String>> resource);
     List<Article> createArticleFromWOS(List<Map<String, String>> resource);
     List<Article> createArticleFromIEEE(List<Map<String, String>> resource);
+    List<Article> createArticleFromScopus(List<Map<String, Object>> resource);
     Page<Article> getAllArticlesByKeywords(List<String> keywords, Pageable pageable);
     Page<Article> getAllArticlesByCategories(List<String> categories, Pageable pageable);
 }

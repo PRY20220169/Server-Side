@@ -65,7 +65,6 @@ public class ArticleServiceImpl implements ArticleService {
         }
         return newArticlesList;
     }
-
     @Override
     public List<Article> createArticleFromWOS(List<Map<String, String>> articleParamsList) {
         List<Article> newArticlesList = new ArrayList<>();
@@ -314,6 +313,61 @@ public class ArticleServiceImpl implements ArticleService {
             newArticlesList.add(newArticle);
             articleRepository.save(newArticle);
             //TODO: Handle errors
+        }
+        return newArticlesList;
+    }
+    @Override
+    public List<Article> createArticleFromScopus(List<Map<String, Object>> articleParamsList) {
+        System.out.println(articleParamsList);
+        List<Article> newArticlesList = new ArrayList<>();
+        for (Map<String, Object> articleParams : articleParamsList) {
+            Article newArticle = new Article();
+
+            // Set Article Title
+            newArticle.setTitle(articleParams.get("dc:title").toString());
+
+            // Set Article Date
+            String dateInString = articleParams.get("prism:coverDate").toString(); //Format: 2021-09-01
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            try {
+                Date date = formatter.parse(dateInString);
+                newArticle.setPublicationDate(date);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
+            // Set Article Description TODO: Get abstract from scopus API
+            // newArticle.setDescription(articleParams.get("article_description").toString());
+            newArticle.setDescription("NO DESC");
+
+            // Set Article Number of Citations
+            newArticle.setNumberOfCitations(Integer.parseInt(articleParams.get("citedby-count").toString()));
+
+            // Scopus does not provide the number of references
+
+            // If Journal exists
+            String journalName = articleParams.get("prism:publicationName").toString();
+            if (journalRepository.existsByName(journalName)) {
+                Journal journal = journalRepository.findByName(journalName);
+                newArticle.setJournal(journal);
+            }
+            else {
+                // If Journal does not exist
+                Journal journal = new Journal();
+                journal.setName(journalName);
+
+                // Set Journal metrics
+                // TODO: Get CiteScore and Impact Factor from Journal
+                journalRepository.save(journal);
+                newArticle.setJournal(journal);
+            }
+
+            // TODO: Get Keywords and Categories from Scopus API
+
+            // Set Authors
+            // TODO: Get all authors from Scopus API
+            newArticlesList.add(newArticle);
+            articleRepository.save(newArticle);
         }
         return newArticlesList;
     }
