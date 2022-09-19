@@ -80,6 +80,11 @@ public class ArticleController {
         return articleService.createArticleFromIEEE(resource);
     }
 
+    @PostMapping("/scopus-rpa")
+    public List<Article> createArticleScopus(@Valid @RequestBody List<Map<String, Object>> resource){
+        return articleService.createArticleFromScopus(resource);
+    }
+
     @PutMapping("/{articleId}")
     public ArticleResource updateArticle(@PathVariable(name = "articleId") Long articleId,
             @Valid @RequestBody SaveArticleResource resource){
