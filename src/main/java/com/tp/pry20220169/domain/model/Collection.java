@@ -25,6 +25,10 @@ public class Collection extends AuditModel {
             inverseJoinColumns = @JoinColumn(name = "article_id"))
     private List<Article> articles = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "account_id", nullable = false)
+    private Account account;
+
     public Collection addArticle(Article article) {
         articles.add(article);
         return this;
