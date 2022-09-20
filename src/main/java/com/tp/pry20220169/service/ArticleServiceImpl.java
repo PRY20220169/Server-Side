@@ -1,5 +1,7 @@
 package com.tp.pry20220169.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tp.pry20220169.domain.model.Article;
 import com.tp.pry20220169.domain.model.Author;
 import com.tp.pry20220169.domain.model.Journal;
@@ -15,6 +17,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -318,7 +322,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
     @Override
     public List<Article> createArticleFromScopus(List<Map<String, Object>> articleParamsList) {
-        System.out.println(articleParamsList);
+
         List<Article> newArticlesList = new ArrayList<>();
         for (Map<String, Object> articleParams : articleParamsList) {
             Article newArticle = new Article();
@@ -336,9 +340,24 @@ public class ArticleServiceImpl implements ArticleService {
                 throw new RuntimeException(e);
             }
 
-            // Set Article Description TODO: Get abstract from scopus API
-            // newArticle.setDescription(articleParams.get("article_description").toString());
-            newArticle.setDescription("NO DESC");
+            // Get article details from Scopus API
+            String pii = articleParams.get("pii").toString();
+            String API_KEY = "dcb7e9db2ce9fe208f9b2b3eb4f931bc";
+            String API_URL = "https://api.elsevier.com/content/article/pii/" + pii + "?httpAccept=application/json&apiKey=" + API_KEY;
+            WebClient client = WebClient.create(API_URL);
+            Mono<String> response = client.get().retrieve().bodyToMono(String.class);
+            String responseValue = response.block();
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String, Map<String, Map<String, Object>>> map;
+
+            try {
+               map = mapper.readValue(responseValue, Map.class);
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+            Map<String, Object> articleInfo = map.get("full-text-retrieval-response").get("coredata");
+            // Set Article Description
+            newArticle.setDescription(articleInfo.get("dc:description").toString().trim());
 
             // Set Article Number of Citations
             newArticle.setNumberOfCitations(Integer.parseInt(articleParams.get("citedby-count").toString()));
@@ -362,10 +381,40 @@ public class ArticleServiceImpl implements ArticleService {
                 newArticle.setJournal(journal);
             }
 
-            // TODO: Get Keywords and Categories from Scopus API
+            //Get Keywords and Categories from Scopus API
+            List<String> keywords = new ArrayList<>();
+            List<Map<String, String>> categories = (List<Map<String, String>>) articleInfo.get("dcterms:subject");
+            for (Map<String, String> category : categories) {
+                keywords.add(category.get("$"));
+            }
+            newArticle.setKeywords(keywords);
+            newArticle.setCategories(keywords);
 
             // Set Authors
-            // TODO: Get all authors from Scopus API
+            List<Map<String, String>> authors = (List<Map<String, String>>) articleInfo.get("dc:creator");
+            List<Author> authorsList = new ArrayList<>();
+            for (Map<String, String> author : authors) {
+                String authorString = author.get("$");
+                List<String> authorInfo = Arrays.asList(authorString.split(","));
+                String firstPart = authorInfo.get(0);
+                String secondPart = authorInfo.get(1).trim();
+                String firstName = Arrays.asList(secondPart.split(" ")).get(0);
+                String lastName = Arrays.asList(firstPart.split(" ")).get(0);
+                List<Author> authorResults = authorRepository.findByFirstNameAndLastName(firstName, lastName);
+                if (authorResults.isEmpty()) {
+                    // Create a new Author
+                    Author newAuthor = new Author();
+                    newAuthor.setLastName(lastName);
+                    newAuthor.setFirstName(firstName);
+                    authorRepository.save(newAuthor);
+                    Author newCreatedAuthor = authorRepository.findTopByOrderByIdDesc();
+                    authorsList.add(newCreatedAuthor);
+                }
+                else {
+                    authorsList.add(authorResults.get(0));
+                }
+            }
+            newArticle.setAuthors(authorsList);
             newArticlesList.add(newArticle);
             articleRepository.save(newArticle);
         }
