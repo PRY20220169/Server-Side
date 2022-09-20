@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "users")
 @Data
-public class User extends AuditModel{
+public class User extends AuditModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,8 +23,8 @@ public class User extends AuditModel{
     @NotBlank
     private String password;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
     @JsonIgnore
     private Account account;
 }

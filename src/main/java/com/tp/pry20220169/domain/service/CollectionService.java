@@ -7,11 +7,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 public interface CollectionService {
-    Page<Collection> getAllCollections(Pageable pageable);
+    Page<Collection> getAllCollectionsByUserId(Long userId, Pageable pageable);
 
     Collection getCollectionById(Long collectionId);
 
-    Collection createCollection(Collection collection);
+    Collection createCollection(Long userId, Collection collection);
 
     Collection updateCollection(Long collectionId, Collection collectionDetails);
 

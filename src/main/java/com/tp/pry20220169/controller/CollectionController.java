@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Tag(name = "Collections", description = "Collections API")
 @RestController
-@RequestMapping("/api/collections")
+@RequestMapping("/api/collections/")
 @CrossOrigin
 public class CollectionController {
     
@@ -29,24 +29,9 @@ public class CollectionController {
     @Autowired
     private ModelMapper mapper;
 
-    @GetMapping("")
-    public Page<CollectionResource> getAllCollections(Pageable pageable){
-        Page<Collection> collectionPage = collectionService.getAllCollections(pageable);
-        List<CollectionResource> resources = collectionPage.getContent()
-                .stream().map(this::convertToResource)
-                .collect(Collectors.toList());
-        return new PageImpl<>(resources, pageable, resources.size());
-    }
-
     @GetMapping("/{collectionId}")
     public CollectionResource getCollectionById(@PathVariable(name = "collectionId") Long collectionId){
         return convertToResource(collectionService.getCollectionById(collectionId));
-    }
-
-    @PostMapping("")
-    public CollectionResource createCollection(@Valid @RequestBody SaveCollectionResource resource){
-        Collection collection = convertToEntity(resource);
-        return convertToResource(collectionService.createCollection(collection));
     }
 
     @PutMapping("/{collectionId}")
