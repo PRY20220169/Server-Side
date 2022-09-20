@@ -50,8 +50,7 @@ public class CollectionServiceImpl implements CollectionService {
     public Collection updateCollection(Long collectionId, Collection collectionDetails) {
         return collectionRepository.findById(collectionId)
                 .map(collection -> {
-                    collection.setName(collection.getName());
-                    collection.setArticles(collection.getArticles());
+                    collection.setName(collectionDetails.getName());
                     return collectionRepository.save(collection);
                 })
                 .orElseThrow(() -> new ResourceNotFoundException("Collection", "Id", collectionId));
