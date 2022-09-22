@@ -7,9 +7,13 @@ import com.tp.pry20220169.exception.ResourceNotFoundException;
 import com.tp.pry20220169.resource.SaveArticleResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class JournalServiceImpl implements JournalService {
@@ -55,5 +59,13 @@ public class JournalServiceImpl implements JournalService {
             journalRepository.delete(journal);
             return ResponseEntity.ok().build();
         }).orElseThrow(() -> new ResourceNotFoundException("Journal", "Id", journalId));
+    }
+
+    @Override
+    public Page<Journal> getAllJournalsByIdList(List<Long> ids, Pageable pageable) {
+        List<Journal> journalList = new ArrayList<>();
+        ids.forEach(journalId -> journalList.add(journalRepository.findById(journalId)
+                .orElseThrow(() -> new ResourceNotFoundException("Journal", "Id", journalId))));
+        return new PageImpl<>(journalList);
     }
 }

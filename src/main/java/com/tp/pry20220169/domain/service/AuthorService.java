@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 public interface AuthorService {
     Page<Author> getAllAuthors(Pageable pageable);
     Page<Author> getAllAuthorsByArticleId(Long articleId, Pageable pageable);
@@ -15,4 +17,5 @@ public interface AuthorService {
     Author createAuthor(Author author);
     Author updateAuthor(Long authorId, Author authorDetails);
     ResponseEntity<?> deleteAuthor(Long authorId);
+    Page<Author> getAllAuthorsByIdList(List<Long> ids, Pageable pageable);
 }

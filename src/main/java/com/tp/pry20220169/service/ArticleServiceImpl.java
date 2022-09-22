@@ -491,4 +491,12 @@ public class ArticleServiceImpl implements ArticleService {
     public Page<Article> getAllArticlesByCategories(List<String> categories, Pageable pageable) {
         return articleRepository.findByCategoriesIn(categories, pageable);
     }
+
+    @Override
+    public Page<Article> getAllArticlesByIdList(List<Long> ids, Pageable pageable) {
+        List<Article> articleList = new ArrayList<>();
+        ids.forEach(articleId -> articleList.add(articleRepository.findById(articleId)
+                .orElseThrow(() -> new ResourceNotFoundException("Article", "Id", articleId))));
+        return new PageImpl<>(articleList);
+    }
 }
