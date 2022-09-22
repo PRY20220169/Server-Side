@@ -6,6 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 public interface JournalService {
     Page<Journal> getAllJournals(Pageable pageable);
     Journal getJournalById(Long journalId);
@@ -13,4 +15,5 @@ public interface JournalService {
     Journal createJournal(Journal journal);
     Journal updateJournal(Long journalId, Journal journalDetails);
     ResponseEntity<?> deleteJournal(Long journalId);
+    Page<Journal> getAllJournalsByIdList(List<Long> ids, Pageable pageable);
 }

@@ -26,4 +26,5 @@ public interface ArticleService {
     List<Article> createArticleFromScopus(List<Map<String, Object>> resource);
     Page<Article> getAllArticlesByKeywords(List<String> keywords, Pageable pageable);
     Page<Article> getAllArticlesByCategories(List<String> categories, Pageable pageable);
+    Page<Article> getAllArticlesByIdList(List<Long> ids, Pageable pageable);
 }
