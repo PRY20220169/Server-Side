@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -80,5 +81,13 @@ public class AuthorServiceImpl implements AuthorService {
             authorRepository.delete(author);
             return ResponseEntity.ok().build();
         }).orElseThrow(() -> new ResourceNotFoundException("Author", "Id", authorId));
+    }
+
+    @Override
+    public Page<Author> getAllAuthorsByIdList(List<Long> ids, Pageable pageable) {
+        List<Author> authorList = new ArrayList<>();
+        ids.forEach(authorId -> authorList.add(authorRepository.findById(authorId)
+                .orElseThrow(() -> new ResourceNotFoundException("Author", "Id", authorId))));
+        return new PageImpl<>(authorList);
     }
 }
