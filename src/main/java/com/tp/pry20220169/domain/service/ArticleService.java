@@ -1,6 +1,7 @@
 package com.tp.pry20220169.domain.service;
 
 import com.tp.pry20220169.domain.model.Article;
+import com.tp.pry20220169.resource.ReferenceResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -26,5 +27,7 @@ public interface ArticleService {
     List<Article> createArticleFromScopus(List<Map<String, Object>> resource);
     Page<Article> getAllArticlesByKeywords(List<String> keywords, Pageable pageable);
     Page<Article> getAllArticlesByCategories(List<String> categories, Pageable pageable);
+
     Page<Article> getAllArticlesByIdList(List<Long> ids, Pageable pageable);
+    ReferenceResource getArticleReferenceById(Long articleId);
 }

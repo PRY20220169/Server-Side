@@ -7,6 +7,7 @@ import com.tp.pry20220169.domain.service.ArticleService;
 import com.tp.pry20220169.domain.service.ConferenceService;
 import com.tp.pry20220169.domain.service.JournalService;
 import com.tp.pry20220169.resource.ArticleResource;
+import com.tp.pry20220169.resource.ReferenceResource;
 import com.tp.pry20220169.resource.SaveArticleResource;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
@@ -99,6 +100,11 @@ public class ArticleController {
     @DeleteMapping("/{articleId}")
     public ResponseEntity<?> deleteArticle(@PathVariable(name = "articleId") Long articleId){
         return articleService.deleteArticle(articleId);
+    }
+
+    @GetMapping("/{articleId}/reference")
+    public ReferenceResource getArticleReferenceById(@PathVariable(name = "articleId") Long articleId){
+        return articleService.getArticleReferenceById(articleId);
     }
 
     private Article convertToEntity(SaveArticleResource resource) { return mapper.map(resource, Article.class); }

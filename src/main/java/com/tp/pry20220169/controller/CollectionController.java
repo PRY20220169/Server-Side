@@ -3,6 +3,7 @@ package com.tp.pry20220169.controller;
 import com.tp.pry20220169.domain.model.Collection;
 import com.tp.pry20220169.domain.service.CollectionService;
 import com.tp.pry20220169.resource.CollectionResource;
+import com.tp.pry20220169.resource.ReferenceResource;
 import com.tp.pry20220169.resource.SaveCollectionResource;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
@@ -59,7 +60,12 @@ public class CollectionController {
     @DeleteMapping("/{collectionId}")
     public ResponseEntity<?> deleteCollection(@PathVariable(name = "collectionId") Long collectionId){
         return collectionService.deleteCollection(collectionId);
-    }  
+    }
+
+    @GetMapping("/{collectionId}/reference")
+    public ReferenceResource getCollectionReferenceById(@PathVariable(name = "collectionId") Long collectionId){
+        return collectionService.getCollectionReferenceById(collectionId);
+    }
     
     private Collection convertToEntity(SaveCollectionResource resource) { return mapper.map(resource, Collection.class); }
     private CollectionResource convertToResource(Collection entity) { return mapper.map(entity, CollectionResource.class); }
