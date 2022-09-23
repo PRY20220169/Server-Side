@@ -8,9 +8,8 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "articles")
@@ -74,4 +73,40 @@ public class Article extends AuditModel{
 
     private int numberOfCitations;
     private int numberOfReferences;
+
+    public String getReference() {
+        //Authors
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i=0; i<this.getAuthors().size(); i++) {
+            Author author = getAuthors().get(i);
+            stringBuilder.append(author.getLastName());
+            stringBuilder.append(", ");
+            stringBuilder.append(author.getFirstName().toCharArray()[0]);
+            if (i+2==getAuthors().size()) stringBuilder.append(". & ");
+            else if (i+1==getAuthors().size()) stringBuilder.append(". ");
+            else stringBuilder.append("., ");
+        }
+
+        //Year
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(this.getPublicationDate());
+        int year = calendar.get(Calendar.YEAR);
+        stringBuilder.append("(");
+        stringBuilder.append(year);
+        stringBuilder.append("). ");
+
+        //Title
+        stringBuilder.append(this.getTitle());
+        stringBuilder.append(". ");
+
+        //Journal
+        String input = this.getJournal().getName();
+        String journalStr = Arrays.stream(input.split(" "))
+                .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
+                .collect(Collectors.joining(" "));
+        stringBuilder.append(journalStr);
+        stringBuilder.append(".");
+
+        return stringBuilder.toString();
+    }
 }

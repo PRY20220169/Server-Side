@@ -35,4 +35,15 @@ public class Collection extends AuditModel {
         return this;
     }
 
+    public String getReference() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i=0; i<this.getArticles().size(); i++) {
+            Article article = this.getArticles().get(i);
+            stringBuilder.append(article.getReference());
+            if (i+1==this.getArticles().size()) break;
+            stringBuilder.append("\n");
+        }
+        return stringBuilder.toString();
+    }
+
 }
