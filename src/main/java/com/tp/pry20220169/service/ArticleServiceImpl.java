@@ -11,6 +11,7 @@ import com.tp.pry20220169.domain.repository.AuthorRepository;
 import com.tp.pry20220169.domain.repository.JournalRepository;
 import com.tp.pry20220169.domain.service.ArticleService;
 import com.tp.pry20220169.exception.ResourceNotFoundException;
+import com.tp.pry20220169.resource.ReferenceResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -24,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -498,5 +500,14 @@ public class ArticleServiceImpl implements ArticleService {
         ids.forEach(articleId -> articleList.add(articleRepository.findById(articleId)
                 .orElseThrow(() -> new ResourceNotFoundException("Article", "Id", articleId))));
         return new PageImpl<>(articleList);
+    }
+
+    @Override
+    public ReferenceResource getArticleReferenceById(Long articleId) {
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> new ResourceNotFoundException("Article", "Id", articleId));
+        ReferenceResource resource = new ReferenceResource();
+        resource.setReference(article.getReference());
+        return resource;
     }
 }
