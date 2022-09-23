@@ -24,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -498,5 +499,46 @@ public class ArticleServiceImpl implements ArticleService {
         ids.forEach(articleId -> articleList.add(articleRepository.findById(articleId)
                 .orElseThrow(() -> new ResourceNotFoundException("Article", "Id", articleId))));
         return new PageImpl<>(articleList);
+    }
+
+    @Override
+    public String getArticleReferenceById(Long articleId) {
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> new ResourceNotFoundException("Article", "Id", articleId));
+        List<Author> authors = article.getAuthors();
+
+        //Authors
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i=0; i<authors.size(); i++) {
+            stringBuilder.append(authors.get(i).getLastName());
+            stringBuilder.append(", ");
+            stringBuilder.append(authors.get(i).getFirstName().toCharArray()[0]);
+            if (i+2==authors.size()) stringBuilder.append("., & ");
+            else if (i+1==authors.size()) stringBuilder.append(". ");
+            else stringBuilder.append("., ");
+        }
+
+        //Year
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(article.getPublicationDate());
+        int year = calendar.get(Calendar.YEAR);
+        stringBuilder.append("(");
+        stringBuilder.append(year);
+        stringBuilder.append("). ");
+
+        //Title
+        stringBuilder.append(article.getTitle());
+        stringBuilder.append(". ");
+
+        //Journal
+        String input = article.getJournal().getName();
+        String journalStr = Arrays.stream(input.split(" "))
+                .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
+                .collect(Collectors.joining(" "));
+        stringBuilder.append(journalStr);
+        stringBuilder.append(".");
+
+        String finalString = stringBuilder.toString();
+        return finalString;
     }
 }
