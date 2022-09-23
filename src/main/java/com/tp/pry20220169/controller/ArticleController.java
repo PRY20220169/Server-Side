@@ -104,10 +104,7 @@ public class ArticleController {
 
     @GetMapping("/{articleId}/reference")
     public ReferenceResource getArticleReferenceById(@PathVariable(name = "articleId") Long articleId){
-        String authors = articleService.getArticleReferenceById(articleId);
-        ReferenceResource resource = new ReferenceResource();
-        resource.setReference(authors);
-        return resource;
+        return articleService.getArticleReferenceById(articleId);
     }
 
     private Article convertToEntity(SaveArticleResource resource) { return mapper.map(resource, Article.class); }

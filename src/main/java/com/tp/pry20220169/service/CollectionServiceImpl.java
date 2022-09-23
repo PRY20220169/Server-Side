@@ -1,11 +1,13 @@
 package com.tp.pry20220169.service;
 
 import com.tp.pry20220169.domain.model.Article;
+import com.tp.pry20220169.domain.model.Author;
 import com.tp.pry20220169.domain.model.Collection;
 import com.tp.pry20220169.domain.repository.ArticleRepository;
 import com.tp.pry20220169.domain.repository.CollectionRepository;
 import com.tp.pry20220169.domain.service.CollectionService;
 import com.tp.pry20220169.exception.ResourceNotFoundException;
+import com.tp.pry20220169.resource.ReferenceResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -82,6 +84,15 @@ public class CollectionServiceImpl implements CollectionService {
                         .map(collection -> collectionRepository.save(collection.removeArticle(article)))
                         .orElseThrow(() -> new ResourceNotFoundException("Collection", "Id", collectionId)))
                 .orElseThrow(() -> new ResourceNotFoundException("Article", "Id", articleId));
+    }
+
+    @Override
+    public ReferenceResource getCollectionReferenceById(Long collectionId) {
+        Collection collection = collectionRepository.findById(collectionId)
+                .orElseThrow(() -> new ResourceNotFoundException("Collection", "Id", collectionId));
+        ReferenceResource resource = new ReferenceResource();
+        resource.setReference(collection.getReference());
+        return resource;
     }
 
 

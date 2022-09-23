@@ -3665,6 +3665,89 @@
 					]
 				},
 				{
+					"name": "GetCollectionReferenceById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/collections/1/reference",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"collections",
+								"1",
+								"reference"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GetArticleReferenceById",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/articles/2/reference",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"articles",
+										"2",
+										"reference"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 23 Sep 2022 00:22:15 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"reference\": \"Peter, K., Helena, B., & Jernej, Z. (2020). Application of bibliometrics in medicine: a historical bibliometrics analysis. Health Information And Libraries Journal.\"\n}"
+						}
+					]
+				},
+				{
 					"name": "CreateCollection",
 					"request": {
 						"method": "POST",
