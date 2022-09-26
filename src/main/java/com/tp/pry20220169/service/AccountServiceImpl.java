@@ -32,11 +32,12 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account createAccount(Long userId, Account account) {
-        if(accountRepository.existsById(userId)) {
+        if (accountRepository.existsById(userId)) {
             throw new ResourceNotFoundException("Account already exists for user with Id: " + userId);
         }
         return userRepository.findById(userId).map(user -> {
             account.setUser(user);
+            user.setAccount(account);
             return accountRepository.save(account);
         }).orElseThrow(() -> new ResourceNotFoundException("User", "Id", userId));
     }
