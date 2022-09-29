@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -22,4 +23,18 @@ public class Journal extends AuditModel{
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "journal_id")
     private List<Metric> metrics;
+
+    //TODO: Expand journal attributes to fit Scimago input
+
+    private Long scimagoId = 0L;
+
+    private String issn = "";
+
+    private String country = "";
+
+    private String publisher = "";
+
+    @Column(columnDefinition = "TEXT")
+    private String categories = "";
+
 }

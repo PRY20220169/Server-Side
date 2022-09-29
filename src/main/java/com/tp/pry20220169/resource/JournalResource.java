@@ -12,5 +12,10 @@ public class JournalResource extends AuditModel {
     private Long id;
     private String name;
     private List<Metric> metrics;
+    private Long scimagoId;
+    private String issn;
+    private String country;
+    private String publisher;
+    private String categories;
 
 }

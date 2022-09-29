@@ -17,4 +17,10 @@ public class SaveJournalResource {
 
     private List<SaveMetricResource> metrics;
 
+    private Long scimagoId;
+    private String issn;
+    private String country;
+    private String publisher;
+    private String categories;
+
 }
