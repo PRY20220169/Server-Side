@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,6 +48,15 @@ public class JournalController {
     public JournalResource createJournal(@Valid @RequestBody SaveJournalResource resource){
         Journal journal = convertToEntity(resource);
         return convertToResource(journalService.createJournal(journal));
+    }
+
+    @PostMapping("/bulk")
+    public ResponseEntity<?> bulkCreateJournal(@Valid @RequestBody List<SaveJournalResource> resource){
+        for (SaveJournalResource r: resource) {
+            Journal journal = convertToEntity(r);
+            journalService.createJournal(journal);
+        }
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{journalId}")
