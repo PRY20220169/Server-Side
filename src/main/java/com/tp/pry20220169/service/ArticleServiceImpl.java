@@ -25,7 +25,6 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -103,7 +102,7 @@ public class ArticleServiceImpl implements ArticleService {
 
             // If Journal exists
             String journalName = articleParams.get("journal_name");
-            if (journalRepository.existsByName(journalName)) {
+            if (journalRepository.existsByNameIgnoreCase(journalName)) {
                 Journal journal = journalRepository.findByName(journalName);
                 newArticle.setJournal(journal);
             }
@@ -234,7 +233,7 @@ public class ArticleServiceImpl implements ArticleService {
 
             // If Journal exists
             String journalName = articleParams.get("journal_name");
-            if (journalRepository.existsByName(journalName)) {
+            if (journalRepository.existsByNameIgnoreCase(journalName)) {
                 Journal journal = journalRepository.findByName(journalName);
                 newArticle.setJournal(journal);
             }
@@ -368,7 +367,7 @@ public class ArticleServiceImpl implements ArticleService {
 
             // If Journal exists
             String journalName = articleParams.get("prism:publicationName").toString();
-            if (journalRepository.existsByName(journalName)) {
+            if (journalRepository.existsByNameIgnoreCase(journalName)) {
                 Journal journal = journalRepository.findByName(journalName);
                 newArticle.setJournal(journal);
             }
