@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //TODO: Add endpoints that required auth
-        http.cors();
+        http.cors(cors -> cors.disable());
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         http.authorizeRequests().antMatchers("/security/users/login/**", "/security/token/refresh", "/security/users/register", "/swagger.html/**", "/swagger.json/**", "/swagger-ui/**").permitAll();//not auth needed
