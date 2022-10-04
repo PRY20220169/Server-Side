@@ -3,15 +3,26 @@ package com.tp.pry20220169.config;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class OpenApiConfiguration {
     @Bean(name = "PRY20220169 OpenApi")
-    public OpenAPI PRY20220169OpenApi(){
+    public OpenAPI PRY20220169OpenApi() {
+        final String securitySchemeName = "bearerAuth";
         return new OpenAPI()
-                .components(new Components())
+                .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
+                .components(new Components()
+                        .addSecuritySchemes(securitySchemeName,
+                                new SecurityScheme()
+                                        .name(securitySchemeName)
+                                        .type(SecurityScheme.Type.HTTP)
+                                        .scheme("bearer")
+                                        .bearerFormat("JWT")
+                        ))
                 .info(new Info()
                         .title("PRY20220169 Application API")
                         .description(
