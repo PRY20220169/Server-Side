@@ -2,6 +2,7 @@ package com.tp.pry20220169;
 
 import com.tp.pry20220169.domain.model.Role;
 import com.tp.pry20220169.domain.model.User;
+import com.tp.pry20220169.domain.repository.RoleRepository;
 import com.tp.pry20220169.domain.service.UserService;
 import com.tp.pry20220169.util.JwtCenter;
 import org.modelmapper.ModelMapper;
@@ -40,9 +41,9 @@ public class Pry20220169Application {
     }
 
     @Bean
-    CommandLineRunner run(UserService userService) {
+    CommandLineRunner run(UserService userService, RoleRepository roleRepository) {
         return args -> {
-            if (userService.getAllUsers(Pageable.ofSize(10)).isEmpty()) {
+            if (userService.getAllUsers(Pageable.ofSize(10)).isEmpty() && roleRepository.count()==0) {
                 userService.saveRole(new Role(null, "ROLE_USER"));
                 userService.saveRole(new Role(null, "ROLE_MANAGER"));
                 userService.saveRole(new Role(null, "ROLE_ADMIN"));
