@@ -16,7 +16,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Tag(name = "Account", description = "Account API")
+@Tag(name = "Collections", description = "Collections API")
 @RestController
 @RequestMapping("/api/users/{userId}/account/collections")
 @CrossOrigin
