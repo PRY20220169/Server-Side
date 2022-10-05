@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 @Tag(name = "Collections", description = "Collections API")
 @RestController
-@RequestMapping("/api/collections/")
+@RequestMapping("/api/collections")
 @CrossOrigin
 public class CollectionController {
     
