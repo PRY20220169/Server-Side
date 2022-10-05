@@ -2,9 +2,12 @@ package com.tp.pry20220169.controller;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tp.pry20220169.domain.model.Account;
 import com.tp.pry20220169.domain.model.Role;
 import com.tp.pry20220169.domain.model.User;
+import com.tp.pry20220169.domain.service.AccountService;
 import com.tp.pry20220169.domain.service.UserService;
+import com.tp.pry20220169.resource.SaveAccountResource;
 import com.tp.pry20220169.resource.security.AuthenticationRequest;
 import com.tp.pry20220169.resource.security.AuthenticationResponse;
 import com.tp.pry20220169.resource.security.RegisterRequest;
@@ -12,6 +15,7 @@ import com.tp.pry20220169.resource.security.RoleToUserForm;
 import com.tp.pry20220169.util.JwtCenter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -41,6 +45,8 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class SecurityController {
 
     private final JwtCenter jwtCenter;
+    private final ModelMapper mapper;
+    private final AccountService accountService;
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
 
@@ -74,11 +80,22 @@ public class SecurityController {
     }
 
     @PostMapping("/users/register")
-    public ResponseEntity<User> saveUser(@RequestBody @Valid RegisterRequest registerRequest) {
+    public ResponseEntity<?> saveUser(@RequestBody @Valid RegisterRequest registerRequest, HttpServletRequest request) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/users").toUriString());
         // could use a mapper
         User user = new User(registerRequest.getUsername(), registerRequest.getPassword());
-        return ResponseEntity.created(uri).body(userService.createUser(user));
+        Long userId = userService.createUser(user).getId();
+        String username = registerRequest.getUsername();
+        String password = registerRequest.getPassword();
+
+        SaveAccountResource resource = new SaveAccountResource();
+        resource.setFirstName(registerRequest.getFirstName());
+        resource.setLastName(registerRequest.getLastName());
+
+        accountService.createAccount(userId, convertToEntity(resource));
+        AuthenticationRequest authRequest = new AuthenticationRequest(username, password);
+
+        return login(authRequest, request);
     }
 
     @GetMapping("/roles")
@@ -125,6 +142,8 @@ public class SecurityController {
         }
         return ResponseEntity.ok().build();
     }
+
+    private Account convertToEntity(SaveAccountResource resource) { return mapper.map(resource, Account.class); }
 }
 
 
