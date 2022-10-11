@@ -78,7 +78,11 @@ public class ArticleServiceImpl implements ArticleService {
             Article newArticle = new Article();
 
             // Set Article Title
-            newArticle.setTitle(articleParams.get("article_title"));
+            String articleTitle = articleParams.get("article_title");
+            if (articleRepository.existsByTitleIgnoreCase(articleTitle)) {
+                continue;
+            }
+            newArticle.setTitle(articleTitle);
 
             // Set Article Date
             String dateInString = articleParams.get("article_date"); //Format: 2008-08-01
@@ -205,7 +209,11 @@ public class ArticleServiceImpl implements ArticleService {
             Article newArticle = new Article();
 
             // Set Article Title
-            newArticle.setTitle(articleParams.get("article_title"));
+            String articleTitle = articleParams.get("article_title");
+            if (articleRepository.existsByTitleIgnoreCase(articleTitle)) {
+                continue;
+            }
+            newArticle.setTitle(articleTitle);
 
             // Set Article Date
             String dateInString = articleParams.get("article_date"); //Date of Publication: 23 December 2020
@@ -329,7 +337,12 @@ public class ArticleServiceImpl implements ArticleService {
             Article newArticle = new Article();
 
             // Set Article Title
-            newArticle.setTitle(articleParams.get("dc:title").toString());
+            // Set Article Title
+            String articleTitle = articleParams.get("dc:title").toString();
+            if (articleRepository.existsByTitleIgnoreCase(articleTitle)) {
+                continue;
+            }
+            newArticle.setTitle(articleTitle);
 
             // Set Article Date
             String dateInString = articleParams.get("prism:coverDate").toString(); //Format: 2021-09-01
