@@ -13,4 +13,5 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     Article findTopByOrderByIdDesc();
     Page<Article> findByKeywordsIn(List<String> keywords, Pageable pageable);
     Page<Article> findByCategoriesIn(List<String> categories, Pageable pageable);
+    Boolean existsByTitleIgnoreCase(String title);
 }
