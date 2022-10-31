@@ -15,8 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static javax.swing.text.html.FormSubmitEvent.MethodType.POST;
-import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.*;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Configuration
@@ -42,7 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/security/users/login/**", "/security/token/refresh", "/security/users/register", "/swagger.html/**", "/swagger.json/**", "/swagger-ui/**").permitAll();//not auth needed
         //Add paths that require auth (token) and role rpa
         http.authorizeRequests().antMatchers(GET, "/security/roles/**").hasAnyAuthority(Role.ROLE_RPA);
-        http.authorizeRequests().antMatchers("/api/collections/**, /api/users/**/account/collections/**").hasAnyAuthority(Role.ROLE_USER);
+        http.authorizeRequests().antMatchers(POST, "/api/collections/**").hasAnyAuthority(Role.ROLE_USER);
+        http.authorizeRequests().antMatchers(POST, "/api/users/**/account/collections/**").hasAnyAuthority(Role.ROLE_USER);
         // Add paths that require auth but no role
         // http.authorizeRequests().antMatchers(GET, "/security/roles/**").authenticated();
         http.authorizeRequests().anyRequest().permitAll();//.authenticated() to close the rest of endpoints

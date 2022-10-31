@@ -50,7 +50,7 @@ public class Pry20220169Application {
                 userService.saveRole(new Role(null, "ROLE_SUPER_ADMIN"));
                 userService.saveRole(new Role(null, "ROLE_RPA"));
                 userService.createUser(new User("diego", "1234"));
-                userService.createUser(new User("ashlyn", "1234"));
+                userService.createUser(new User("miguel", "1234"));
                 userService.createUser(new User("anibal", "1234"));
                 userService.createUser(new User("jim", "1234"));
 
@@ -58,8 +58,8 @@ public class Pry20220169Application {
                 userService.addRoleToUser("diego", "ROLE_MANAGER");
                 userService.addRoleToUser("diego", "ROLE_ADMIN");
                 userService.addRoleToUser("diego", "ROLE_SUPER_ADMIN");
-                userService.addRoleToUser("ashlyn", "ROLE_USER");
-                userService.addRoleToUser("ashlyn", "ROLE_SUPER_ADMIN");
+                userService.addRoleToUser("miguel", "ROLE_USER");
+                userService.addRoleToUser("miguel", "ROLE_SUPER_ADMIN");
                 userService.addRoleToUser("anibal", "ROLE_USER");
                 userService.addRoleToUser("anibal", Role.ROLE_RPA);
                 userService.addRoleToUser("jim", "ROLE_USER");

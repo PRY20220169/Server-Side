@@ -1,6 +1,8 @@
 package com.tp.pry20220169.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -14,6 +16,8 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name = "articles")
 @Data
+@Builder
+@AllArgsConstructor
 public class Article extends AuditModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +37,8 @@ public class Article extends AuditModel{
 
     @ManyToMany(mappedBy = "articles")
     private List<Collection> collections;
+
+    public Article() { }
 
     public boolean hasAuthor(Author author) { return (this.getAuthors().contains(author)); }
 

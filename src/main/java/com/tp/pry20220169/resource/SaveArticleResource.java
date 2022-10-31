@@ -1,5 +1,6 @@
 package com.tp.pry20220169.resource;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.Min;
@@ -10,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
+@Builder
 public class SaveArticleResource {
 
     @NotNull

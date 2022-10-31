@@ -1,9 +1,10 @@
 package com.tp.pry20220169.resource.security;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 
-@Data
+@Data @NoArgsConstructor
 public class AuthenticationResponse {
 
     private Long id;
