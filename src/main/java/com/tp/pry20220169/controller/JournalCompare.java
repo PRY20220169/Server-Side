@@ -38,6 +38,15 @@ public class JournalCompare {
         return new PageImpl<>(resources, pageable, resources.size());
     }
 
+    @PostMapping("")
+    public Page<JournalResource> compareJournalsByIdPost(@Valid @RequestBody IdListWrapper idList, Pageable pageable){
+        Page<Journal> journalPage = journalService.getAllJournalsByIdList(idList.getIds(), pageable);
+        List<JournalResource> resources = journalPage.getContent()
+                .stream().map(this::convertToResource)
+                .collect(Collectors.toList());
+        return new PageImpl<>(resources, pageable, resources.size());
+    }
+
     private Journal convertToEntity(SaveJournalResource resource) { return mapper.map(resource, Journal.class); }
     private JournalResource convertToResource(Journal entity) { return mapper.map(entity, JournalResource.class); }
 

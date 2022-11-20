@@ -80,7 +80,7 @@ public class CollectionServiceImpl implements CollectionService {
         return articleRepository.findById(articleId)
                 .map(article -> collectionRepository.findById(collectionId)
                         .map(collection -> collectionRepository.save(collection.addArticle(article)))
-                        .orElseThrow(() -> new ResourceNotFoundException("Collection", "Id", collectionId)))
+                        .orElseThrow(() -> new ResourceNotFoundException("Cree una colección para añadir el artículo")))
                 .orElseThrow(() -> new ResourceNotFoundException("Article", "Id", articleId));
     }
 

@@ -3,12 +3,16 @@ package com.tp.pry20220169.resource;
 import com.tp.pry20220169.domain.model.AuditModel;
 import com.tp.pry20220169.domain.model.Author;
 import com.tp.pry20220169.domain.model.Journal;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ArticleResource extends AuditModel {
 
     private Long id;

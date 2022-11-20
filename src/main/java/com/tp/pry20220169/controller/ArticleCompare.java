@@ -30,7 +30,7 @@ public class ArticleCompare {
     private ModelMapper mapper;
 
     @GetMapping("")
-    public Page<ArticleResource> compareArticlesById(@Valid @RequestBody IdListWrapper idList, Pageable pageable){
+    public Page<ArticleResource> compareArticlesById(@Valid @RequestBody IdListWrapper idList, Pageable pageable) {
         Page<Article> articlePage = articleService.getAllArticlesByIdList(idList.getIds(), pageable);
         List<ArticleResource> resources = articlePage.getContent()
                 .stream().map(this::convertToResource)
@@ -38,8 +38,23 @@ public class ArticleCompare {
         return new PageImpl<>(resources, pageable, resources.size());
     }
 
-    private Article convertToEntity(SaveArticleResource resource) { return mapper.map(resource, Article.class); }
-    private ArticleResource convertToResource(Article entity) { return mapper.map(entity, ArticleResource.class); }
+
+    @PostMapping("")
+    public Page<ArticleResource> compareArticlesByIdPost(@Valid @RequestBody IdListWrapper idList, Pageable pageable) {
+        Page<Article> articlePage = articleService.getAllArticlesByIdList(idList.getIds(), pageable);
+        List<ArticleResource> resources = articlePage.getContent()
+                .stream().map(this::convertToResource)
+                .collect(Collectors.toList());
+        return new PageImpl<>(resources, pageable, resources.size());
+    }
+
+    private Article convertToEntity(SaveArticleResource resource) {
+        return mapper.map(resource, Article.class);
+    }
+
+    private ArticleResource convertToResource(Article entity) {
+        return mapper.map(entity, ArticleResource.class);
+    }
 
     @Data
     public static class IdListWrapper {

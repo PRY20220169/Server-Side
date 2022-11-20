@@ -1,6 +1,6 @@
 package com.tp.pry20220169.exception;
 
-public class ResourceNotFoundException extends RuntimeException{
+public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException() {
         super();
     }

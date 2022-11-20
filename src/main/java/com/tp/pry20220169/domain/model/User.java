@@ -2,6 +2,7 @@ package com.tp.pry20220169.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,6 +16,8 @@ import java.util.Collection;
 @Table(name = "users")
 @NoArgsConstructor
 @Data
+@Builder
+@AllArgsConstructor
 public class User extends AuditModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
