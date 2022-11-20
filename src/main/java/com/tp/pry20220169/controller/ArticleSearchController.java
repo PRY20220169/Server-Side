@@ -30,7 +30,7 @@ public class ArticleSearchController {
     @Autowired
     private ModelMapper mapper;
 
-    @GetMapping("/keywords")
+    @PostMapping("/keywords")
     public Page<ArticleResource> searchByKeywords(@Valid @RequestBody KeywordsWrapper keywords, Pageable pageable){
         Page<Article> articlePage = articleService.getAllArticlesByKeywords(keywords.getKeywords(), pageable);
         List<ArticleResource> resources = articlePage.getContent()
@@ -48,7 +48,7 @@ public class ArticleSearchController {
         return new PageImpl<>(resources, pageable, resources.size());
     }
 
-    @GetMapping("/categories")
+    @PostMapping("/categories")
     public Page<ArticleResource> searchByCategories(@Valid @RequestBody CategoriesWrapper categories, Pageable pageable){
         Page<Article> articlePage = articleService.getAllArticlesByCategories(categories.getCategories(), pageable);
         List<ArticleResource> resources = articlePage.getContent()

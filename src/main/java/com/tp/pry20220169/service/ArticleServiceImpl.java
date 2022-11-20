@@ -78,7 +78,11 @@ public class ArticleServiceImpl implements ArticleService {
             Article newArticle = new Article();
 
             // Set Article Title
-            newArticle.setTitle(articleParams.get("article_title"));
+            String articleTitle = articleParams.get("article_title");
+            if (articleRepository.existsByTitleIgnoreCase(articleTitle)) {
+                continue;
+            }
+            newArticle.setTitle(articleTitle);
 
             // Set Article Date
             String dateInString = articleParams.get("article_date"); //Format: 2008-08-01
@@ -94,11 +98,15 @@ public class ArticleServiceImpl implements ArticleService {
 
             // Set Article Number of Citations
             String nocString = articleParams.get("article_noc").replaceAll("\\s+","");
-            newArticle.setNumberOfCitations(Integer.parseInt(nocString));
+            if (!nocString.equals("")) {
+                newArticle.setNumberOfCitations(Integer.parseInt(nocString));
+            }
 
             // Set Article Number of References
             String norString = articleParams.get("article_nor").replaceAll("\\s+","");
-            newArticle.setNumberOfReferences(Integer.parseInt(norString));
+            if (!norString.equals("")) {
+                newArticle.setNumberOfReferences(Integer.parseInt(norString));
+            }
 
             // If Journal exists
             String journalName = articleParams.get("journal_name");
@@ -168,26 +176,28 @@ public class ArticleServiceImpl implements ArticleService {
 
             List<Author> authorsList = new ArrayList<>();
             for (String authorString : authors) {
-                if (authorString.length() == 0) {
-                    continue;
-                }
-                List<String> authorInfo = Arrays.asList(authorString.split(","));
-                String firstPart = authorInfo.get(0);
-                String secondPart = authorInfo.get(1).trim();
-                String firstName = Arrays.asList(firstPart.split(" ")).get(0);
-                String lastName = Arrays.asList(secondPart.split(" ")).get(0);
-                List<Author> authorResults = authorRepository.findByFirstNameAndLastName(firstName, lastName);
-                if (authorResults.isEmpty()) {
-                    // Create a new Author
-                    Author author = new Author();
-                    author.setLastName(lastName);
-                    author.setFirstName(firstName);
-                    authorRepository.save(author);
-                    Author newAuthor = authorRepository.findTopByOrderByIdDesc();
-                    authorsList.add(newAuthor);
-                }
-                else {
-                    authorsList.add(authorResults.get(0));
+                if (authorString.length() != 0) {
+                    List<String> authorInfo = Arrays.asList(authorString.split(","));
+                    if (authorInfo.size() < 2) {
+                        authorInfo = Arrays.asList(authorString.split(" "));
+                    }
+                    String firstPart = authorInfo.get(0);
+                    String secondPart = authorInfo.get(1).trim();
+                    String firstName = Arrays.asList(firstPart.split(" ")).get(0);
+                    String lastName = Arrays.asList(secondPart.split(" ")).get(0);
+                    List<Author> authorResults = authorRepository.findByFirstNameAndLastName(firstName, lastName);
+                    if (authorResults.isEmpty()) {
+                        // Create a new Author
+                        Author author = new Author();
+                        author.setLastName(lastName);
+                        author.setFirstName(firstName);
+                        authorRepository.save(author);
+                        Author newAuthor = authorRepository.findTopByOrderByIdDesc();
+                        authorsList.add(newAuthor);
+                    }
+                    else {
+                        authorsList.add(authorResults.get(0));
+                    }
                 }
             }
             newArticle.setAuthors(authorsList);
@@ -205,7 +215,11 @@ public class ArticleServiceImpl implements ArticleService {
             Article newArticle = new Article();
 
             // Set Article Title
-            newArticle.setTitle(articleParams.get("article_title"));
+            String articleTitle = articleParams.get("article_title");
+            if (articleRepository.existsByTitleIgnoreCase(articleTitle)) {
+                continue;
+            }
+            newArticle.setTitle(articleTitle);
 
             // Set Article Date
             String dateInString = articleParams.get("article_date"); //Date of Publication: 23 December 2020
@@ -215,7 +229,7 @@ public class ArticleServiceImpl implements ArticleService {
                 Date date = formatter.parse(dateInString);
                 newArticle.setPublicationDate(date);
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                continue;
             }
             // Set Article Description
             newArticle.setDescription(articleParams.get("article_description"));
@@ -329,7 +343,12 @@ public class ArticleServiceImpl implements ArticleService {
             Article newArticle = new Article();
 
             // Set Article Title
-            newArticle.setTitle(articleParams.get("dc:title").toString());
+            // Set Article Title
+            String articleTitle = articleParams.get("dc:title").toString();
+            if (articleRepository.existsByTitleIgnoreCase(articleTitle)) {
+                continue;
+            }
+            newArticle.setTitle(articleTitle);
 
             // Set Article Date
             String dateInString = articleParams.get("prism:coverDate").toString(); //Format: 2021-09-01
@@ -342,6 +361,9 @@ public class ArticleServiceImpl implements ArticleService {
             }
 
             // Get article details from Scopus API
+            if (articleParams.get("pii") == null) {
+                continue;
+            }
             String pii = articleParams.get("pii").toString();
             String API_KEY = "dcb7e9db2ce9fe208f9b2b3eb4f931bc";
             String API_URL = "https://api.elsevier.com/content/article/pii/" + pii + "?httpAccept=application/json&apiKey=" + API_KEY;
