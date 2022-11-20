@@ -7,6 +7,7 @@ import com.tp.pry20220169.domain.model.Role;
 import com.tp.pry20220169.domain.model.User;
 import com.tp.pry20220169.domain.service.AccountService;
 import com.tp.pry20220169.domain.service.UserService;
+import com.tp.pry20220169.exception.ForbiddenException;
 import com.tp.pry20220169.resource.SaveAccountResource;
 import com.tp.pry20220169.resource.security.AuthenticationRequest;
 import com.tp.pry20220169.resource.security.AuthenticationResponse;
@@ -69,7 +70,7 @@ public class SecurityController {
             log.error("Error logging in {}", exception.getMessage());
             Map<String, String> error = new HashMap<>();
             error.put("error_message", exception.getMessage());
-            return ResponseEntity.status(FORBIDDEN).body(error);
+            throw new ForbiddenException("Wrong email or password");
         }
 
         User user = userService.getUserByUsername(username);

@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Data
 @Builder
 @AllArgsConstructor
-public class Article extends AuditModel{
+public class Article extends AuditModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,25 +30,32 @@ public class Article extends AuditModel{
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "article_authors",
-    joinColumns = {@JoinColumn(name = "article_id")},
-    inverseJoinColumns = {@JoinColumn(name = "author_id")})
+            joinColumns = {@JoinColumn(name = "article_id")},
+            inverseJoinColumns = {@JoinColumn(name = "author_id")})
     @JsonIgnore
     private List<Author> authors;
 
     @ManyToMany(mappedBy = "articles")
     private List<Collection> collections;
 
-    public Article() { }
+    public Article() {
+    }
 
-    public boolean hasAuthor(Author author) { return (this.getAuthors().contains(author)); }
+    public boolean hasAuthor(Author author) {
+        return (this.getAuthors().contains(author));
+    }
 
     public Article addAuthor(Author author) {
-        if(!this.hasAuthor(author)){ this.getAuthors().add(author); }
+        if (!this.hasAuthor(author)) {
+            this.getAuthors().add(author);
+        }
         return this;
     }
 
     public Article removeAuthor(Author author) {
-        if(this.hasAuthor(author)){ this.getAuthors().remove(author); }
+        if (this.hasAuthor(author)) {
+            this.getAuthors().remove(author);
+        }
         return this;
     }
 
@@ -83,13 +90,13 @@ public class Article extends AuditModel{
     public String getReference() {
         //Authors
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i=0; i<this.getAuthors().size(); i++) {
+        for (int i = 0; i < this.getAuthors().size(); i++) {
             Author author = getAuthors().get(i);
             stringBuilder.append(author.getLastName());
             stringBuilder.append(", ");
             stringBuilder.append(author.getFirstName().toCharArray()[0]);
-            if (i+2==getAuthors().size()) stringBuilder.append(". & ");
-            else if (i+1==getAuthors().size()) stringBuilder.append(". ");
+            if (i + 2 == getAuthors().size()) stringBuilder.append(". & ");
+            else if (i + 1 == getAuthors().size()) stringBuilder.append(". ");
             else stringBuilder.append("., ");
         }
 

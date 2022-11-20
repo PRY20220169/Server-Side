@@ -39,6 +39,15 @@ public class ArticleSearchController {
         return new PageImpl<>(resources, pageable, resources.size());
     }
 
+    @PostMapping("/keywords")
+    public Page<ArticleResource> searchByKeywordsPost(@Valid @RequestBody KeywordsWrapper keywords, Pageable pageable){
+        Page<Article> articlePage = articleService.getAllArticlesByKeywords(keywords.getKeywords(), pageable);
+        List<ArticleResource> resources = articlePage.getContent()
+                .stream().map(this::convertToResource)
+                .collect(Collectors.toList());
+        return new PageImpl<>(resources, pageable, resources.size());
+    }
+
     @GetMapping("/categories")
     public Page<ArticleResource> searchByCategories(@Valid @RequestBody CategoriesWrapper categories, Pageable pageable){
         Page<Article> articlePage = articleService.getAllArticlesByCategories(categories.getCategories(), pageable);

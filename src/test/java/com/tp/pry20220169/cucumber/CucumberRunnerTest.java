@@ -5,6 +5,7 @@ import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.junit.runner.RunWith;
+import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -18,7 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
         Pry20220169Application.class,
         CucumberRunnerTest.class},
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureTestDatabase
+@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 public class CucumberRunnerTest {
 
 

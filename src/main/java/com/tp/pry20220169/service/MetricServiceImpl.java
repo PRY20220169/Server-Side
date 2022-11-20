@@ -36,7 +36,7 @@ public class MetricServiceImpl implements MetricService {
         return metricRepository.findById(metricId).map(metric -> {
             metric.setBibliometric(metricDetails.getBibliometric());
             metric.setScore(metricDetails.getScore());
-            metric.setYear(metricDetails.getYear());
+            metric.setMetricYear(metricDetails.getMetricYear());
             metric.setSource(metricDetails.getSource());
             return metricRepository.save(metric);
         }).orElseThrow(() -> new ResourceNotFoundException("Metric", "Id", metricId));

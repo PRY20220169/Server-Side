@@ -7,7 +7,7 @@ Feature: Validate User
     Then The app returns a successful response
     Examples:
       | email            | password       |
-      | "test@gmail.com" | "securePassword" |
+      | "diego" | "1234" |
 
   Scenario Outline: As a user i try to login with a non registered email
     Given I am a user without and account registered
@@ -16,12 +16,12 @@ Feature: Validate User
     And The system shows the message <error>
     Examples:
       | email                  | error                                                |
-      | "noExisting@gmail.com" | "Introduce una direccion de correo electronico valido" |
+      | "noExisting@gmail.com" | "Wrong email or password" |
 
   Scenario Outline: As user i want to login with the wrong password
     Given I am a user already registered in the app
     When I complete the form fields with my <email> and <password>
-    And click the login button
+    And click the login button with the wrong password
     Then The app authenticates the wrong password and returns error <message>
     Examples:
       | email            | password      | message                 |

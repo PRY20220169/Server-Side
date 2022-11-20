@@ -125,7 +125,7 @@ public class ArticleServiceImpl implements ArticleService {
                         journalIfValue = 0;
                     }
                     jif.setScore(Float.toString(journalIfValue));
-                    jif.setYear(Calendar.getInstance().get(Calendar.YEAR));
+                    jif.setMetricYear(Calendar.getInstance().get(Calendar.YEAR));
                     jif.setSource(articleParams.get("source"));
                     metrics.add(jif);
                 }
@@ -135,7 +135,7 @@ public class ArticleServiceImpl implements ArticleService {
                     Metric jci = new Metric();
                     jci.setBibliometric("Journal Citation Indicator");
                     jci.setScore(articleParams.get("journal_ci"));
-                    jci.setYear(Calendar.getInstance().get(Calendar.YEAR));
+                    jci.setMetricYear(Calendar.getInstance().get(Calendar.YEAR));
                     jci.setSource(articleParams.get("source"));
                     metrics.add(jci);
                 }
@@ -255,7 +255,7 @@ public class ArticleServiceImpl implements ArticleService {
                         journalIfValue = 0;
                     }
                     jif.setScore(Float.toString(journalIfValue));
-                    jif.setYear(Calendar.getInstance().get(Calendar.YEAR));
+                    jif.setMetricYear(Calendar.getInstance().get(Calendar.YEAR));
                     jif.setSource(articleParams.get("source"));
                     metrics.add(jif);
                 }
@@ -265,7 +265,7 @@ public class ArticleServiceImpl implements ArticleService {
                     Metric eigenfactor = new Metric();
                     eigenfactor.setBibliometric("Journal Eigenfactor");
                     eigenfactor.setScore(articleParams.get("journal_eigenfactor"));
-                    eigenfactor.setYear(Calendar.getInstance().get(Calendar.YEAR));
+                    eigenfactor.setMetricYear(Calendar.getInstance().get(Calendar.YEAR));
                     eigenfactor.setSource(articleParams.get("source"));
                     metrics.add(eigenfactor);
                 }

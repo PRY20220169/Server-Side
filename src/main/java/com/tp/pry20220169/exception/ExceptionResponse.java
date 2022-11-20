@@ -11,5 +11,5 @@ import org.springframework.http.HttpStatus;
 public class ExceptionResponse {
     public String message;
     public String details;
-    private HttpStatus status;
+    public Integer status;
 }

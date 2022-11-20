@@ -38,6 +38,15 @@ public class AuthorCompare {
         return new PageImpl<>(resources, pageable, resources.size());
     }
 
+    @PostMapping("")
+    public Page<AuthorResource> compareAuthorsByIdPost(@Valid @RequestBody IdListWrapper idList, Pageable pageable){
+        Page<Author> authorPage = authorService.getAllAuthorsByIdList(idList.getIds(), pageable);
+        List<AuthorResource> resources = authorPage.getContent()
+                .stream().map(this::convertToResource)
+                .collect(Collectors.toList());
+        return new PageImpl<>(resources, pageable, resources.size());
+    }
+
     private Author convertToEntity(SaveAuthorResource resource) { return mapper.map(resource, Author.class); }
     private AuthorResource convertToResource(Author entity) { return mapper.map(entity, AuthorResource.class); }
 

@@ -14,7 +14,7 @@ public class RegisterRequest {
     @NotBlank
     private String username;
     @NotBlank
-    @Size(min = 8)
+    @Size(min = 8, message = "password is too weak")
     //TODO: create contrains to validate at least one capital letter, one special character like "@" and at least one numbers
     private String password;
     @NotBlank

@@ -2,6 +2,7 @@ package com.tp.pry20220169.cucumber.glue;
 
 import com.tp.pry20220169.domain.model.User;
 import com.tp.pry20220169.domain.service.UserService;
+import com.tp.pry20220169.exception.ExceptionResponse;
 import com.tp.pry20220169.exception.ResourceNotFoundException;
 import com.tp.pry20220169.resource.security.AuthenticationResponse;
 import com.tp.pry20220169.resource.security.RegisterRequest;
@@ -28,7 +29,7 @@ public class RegisterUserSteps {
 
     private AuthenticationResponse authenticationResponse;
 
-    private Throwable errorResponse;
+    private ExceptionResponse errorResponse;
 
     @Given("I am a user and click the button register")
     public void iAmAUserAndClickTheButtonRegister() {
@@ -77,7 +78,7 @@ public class RegisterUserSteps {
     @Then("The system verifies that te email is registered and shows an error message")
     public void theSystemVerifiesThatTeEmailIsRegisteredAndShowsAnErrorMessage() {
         errorResponse = restTemplate.
-                postForObject("/security/users/register", registerRequest, ResourceNotFoundException.class);
+                postForObject("/security/users/register", registerRequest, ExceptionResponse.class);
         //TODO: Make sure error response returns error message, right now message is null
         assertThat(errorResponse).isNotNull();
     }
@@ -95,8 +96,8 @@ public class RegisterUserSteps {
     @Then("The system verifies the password is weak and returns an error message response")
     public void theSystemVerifiesThePasswordIsWeakAndReturnsAnErrorMessageResponse() {
         errorResponse = restTemplate.
-                postForObject("/security/users/register", registerRequest, ResourceNotFoundException.class);
-        assertThat(errorResponse).isNotNull();
+                postForObject("/security/users/register", registerRequest, ExceptionResponse.class);
+        assertThat(errorResponse.getMessage()).isEqualTo("password is too weak");
     }
 
 }
